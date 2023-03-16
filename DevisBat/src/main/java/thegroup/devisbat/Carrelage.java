@@ -8,6 +8,9 @@ package thegroup.devisbat;
  *
  * @author mhibou01
  */
-public class revetement {
-    
+public class Carrelage extends Revetement{
+    int idrevetement;
+    double surface;
+    double prix;
+    double cout;
 }
