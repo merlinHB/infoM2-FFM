@@ -59,9 +59,10 @@ public class piece {
         this.c4 = c4;
     }
     
-    @Override 
-    public String toString() {
+   // @Override 
+    //public String toString() {
         String sol = null;
-        return sol{" + id + ", c1=" + c1 + ", c2=" + c2 + ", c3=" + c3  + ", c4=" + c4'}';
+        //return sol{" + id + ", c1=" + c1 + ", c2=" + c2 + ", c3=" + c3  + ", c4=" + c4'}';
         
+//}
 }
