@@ -4,12 +4,9 @@ public class DevisBat {
 
     public static void main(String[] args) {
         
-        double t = System.nanoTime();
-        long tt = System.nanoTime();
-        System.out.println(Lire.Temps());
-        System.out.println(Lire.Temps());
-        System.out.println(Lire.Temps());
-        
-        
+        Coin c = new Coin(0,0,0);
+        System.out.println(c);
+        SaveClass.coins.add(c);
+        SaveClass.Enregister();
     }
 }
