@@ -23,7 +23,7 @@ public class Coin {
 
     @Override
     public String toString() {
-        return "Coin{" + "id=" + id + ", x=" + x + ", y=" + y + '}';
+        return "C" + id + "(" + x + ";" + y + ")";
     }
     
     public int getId() {

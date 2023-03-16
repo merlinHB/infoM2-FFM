@@ -1,6 +1,7 @@
 package thegroup.devisbat;
 
 import java.util.List;
+import java.io.*;
 
 public class SaveClass {
     public static List<Coin> coins;
@@ -9,6 +10,18 @@ public class SaveClass {
     
     public static void Enregister()
     {
-        //là ça enregistre
+        try
+        {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("Enregistrement.tahLeDevis",true));
+            for(int i =0; i<coins.size(); i++)
+            {
+                bw.write(coins[i]);
+            }
+            bw.close();
+        }
+        catch (IOException err)
+        {
+            System.out.println("Erreur :\n"+err);
+        }
     }
 }
