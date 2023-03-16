@@ -31,7 +31,7 @@ public class Mur {
         return id;
     }
 
-    @Override
+    @Override 
     public String toString() {
         return "M" + id + "(" + c1 + ";" + c2 + ")";
     }
