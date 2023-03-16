@@ -15,7 +15,8 @@ public class SaveClass {
             BufferedWriter bw = new BufferedWriter(new FileWriter("Enregistrement.tahLeDevis",true));
             for(int i =0; i<coins.size(); i++)
             {
-                bw.write(coins[i]);
+                bw.write(coins.get(i) + "/");
+                bw.newLine();
             }
             bw.close();
         }
