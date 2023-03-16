@@ -9,5 +9,7 @@ public class DevisBat {
         System.out.println(Lire.Temps());
         System.out.println(Lire.Temps());
         System.out.println(Lire.Temps());
+        
+        
     }
 }
