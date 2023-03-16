@@ -18,7 +18,7 @@ public class Revetement {
         this.idrevetement = idrevetement;
         this.surface = surface;
         this.prix = prix;
-        cout = surface*prix;
+        this.cout = surface*prix;
     }
    
     
