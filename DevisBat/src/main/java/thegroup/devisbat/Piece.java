@@ -59,10 +59,8 @@ public class Piece {
         this.c4 = c4;
     }
     
-   // @Override 
-    //public String toString() {
-        String sol = null;
-        //return sol{" + id + ", c1=" + c1 + ", c2=" + c2 + ", c3=" + c3  + ", c4=" + c4'}';
-        
-//}
+    public double surfacepiece() {
+        double surfacepiece = Math.abs(c1.getX()-c2.getX())*Math.abs(c1.getY()-c4.getY());
+        return surfacepiece;
+    }
 }
