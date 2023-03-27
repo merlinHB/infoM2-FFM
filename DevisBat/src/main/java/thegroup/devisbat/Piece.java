@@ -8,8 +8,8 @@ package thegroup.devisbat;
  *
  * @author fscheer01
  */
-public class piece {
-    public piece(int id, Coin c1, Coin c2, Coin c3, Coin c4)
+public class Piece {
+    public Piece(int id, Coin c1, Coin c2, Coin c3, Coin c4)
     {
         this.id = id;
         this.c1 = c1;
