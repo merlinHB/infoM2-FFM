@@ -24,7 +24,12 @@ public class Appartement {
         double s = 0;
         for(Piece p : pieces)
         {
-            s += p.surfacePiece();
+            s += p.sol.getCout();
+            s += p.getPlafond().GetCout();
+            for(Mur m : p.getMurs())
+            {
+                s += m.getRevetement().cout;
+            }
         }
         return s;
     }

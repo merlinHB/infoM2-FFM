@@ -10,6 +10,15 @@ public class Mur {
     private int id;
     private Coin c1;
     private Coin c2;
+    private Revetement revetement;
+
+    public Revetement getRevetement() {
+        return revetement;
+    }
+
+    public void setRevetement(Revetement revetement) {
+        this.revetement = revetement;
+    }
 
     public Coin getC1() {
         return c1;
