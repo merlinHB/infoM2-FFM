@@ -9,9 +9,14 @@ package thegroup.devisbat;
  *
  * @author fscheer01
  */
-public class Isolant extends {
-    int idrevetement;
-    double surface;
-    double prix;
-    double cout;    
-}
+public class Isolant extends Revetement {
+    
+    double cout;
+
+public Isolant(int idrevetement, double surface, double prix) {
+       super(idrevetement, surface, prix);
+       cout = surface*prix;
+       this.cout = surface*prix;
+    }
+}    
+

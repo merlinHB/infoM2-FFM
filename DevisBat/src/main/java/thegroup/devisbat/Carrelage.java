@@ -9,17 +9,19 @@ package thegroup.devisbat;
  * @author mhibou01
  */
 public class Carrelage extends Revetement{
-    int idrevetement;
-    double surface;
-    double prix;
+
     double cout;
 
-    @Override
-    public String toString() {
-        return "Carrelage{" + "idrevetement=" + idrevetement + ", surface=" + surface + ", prix=" + prix + ", cout=" + cout + '}';
+    
+    public Carrelage(int idrevetement, double surface, double prix) {
+       super(idrevetement, surface, prix);
+       cout = surface*prix;
+       this.cout = surface*prix;
     }
-    
-    
 }
+    
+    
+    
+
 
 

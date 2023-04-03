@@ -10,7 +10,7 @@ package thegroup.devisbat;
  */
 public class Revetement {
     
-    private int idrevetement;
+    protected int idrevetement;
     protected double surface;
     protected double prix;
     protected double cout;
