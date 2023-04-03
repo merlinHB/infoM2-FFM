@@ -13,4 +13,13 @@ public class Carrelage extends Revetement{
     double surface;
     double prix;
     double cout;
+
+    @Override
+    public String toString() {
+        return "Carrelage{" + "idrevetement=" + idrevetement + ", surface=" + surface + ", prix=" + prix + ", cout=" + cout + '}';
+    }
+    
+    
 }
+
+
