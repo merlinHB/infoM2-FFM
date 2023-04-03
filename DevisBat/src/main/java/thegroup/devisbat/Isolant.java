@@ -10,5 +10,8 @@ package thegroup.devisbat;
  * @author fscheer01
  */
 public class Isolant extends {
-    
+    int idrevetement;
+    double surface;
+    double prix;
+    double cout;    
 }
