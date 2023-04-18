@@ -22,7 +22,7 @@ public class Appartement {
     public double surface()
     {
         double s = 0;
-        for(Piece p : pieces)
+        /*for(Piece p : pieces)
         {
             s += p.sol.getCout();
             s += p.getPlafond().GetCout();
@@ -30,7 +30,7 @@ public class Appartement {
             {
                 s += m.getRevetement().cout;
             }
-        }
+        }*/
         return s;
     }
     
@@ -42,9 +42,9 @@ public class Appartement {
     public double devisAppartement()
     {
         double cout = 0;
-        for(Piece p : pieces){
-            cout += p.;
-        }
+        /*for(Piece p : pieces){
+            //cout += p.;
+        }*/
         return cout;
     }
     
