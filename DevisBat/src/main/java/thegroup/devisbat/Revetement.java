@@ -1,26 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package thegroup.devisbat;
 
 /**
  *
  * @author mhibou01
  */
-public class Revetement {
-    
-    protected int idrevetement;
-    protected double surface;
-    protected double prix;
-    protected double cout;
-    
-    public Revetement(int idrevetement, double surface, double prix) {
-        this.idrevetement = idrevetement;
-        this.surface = surface;
+public abstract class Revetement {
+    private int id;
+    private String nom;
+    private double prix;
+
+    public Revetement(int id, String nom, double prix) {
+        this.id = id;
+        this.nom = nom;
         this.prix = prix;
-        cout = surface*prix;
-        this.cout = surface*prix;
     }
+    
+    public double cout(double surface)
+    {
+        return surface * prix;
+    }
+
+    @Override
+    public String toString() {
+        return id + ": " + nom + ": " + prix;
+    }
+
+    public int getId() {
+        return id;
+    }
+    
     
 }

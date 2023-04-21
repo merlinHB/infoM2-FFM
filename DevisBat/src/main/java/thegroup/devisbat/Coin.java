@@ -9,6 +9,7 @@ public class Coin {
         this.id = id;
         this.x = x;
         this.y = y;
+        Sauveteur.add(this);
     }
     
     private int id;

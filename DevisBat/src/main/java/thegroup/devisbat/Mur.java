@@ -1,16 +1,28 @@
 package thegroup.devisbat;
 
 public class Mur {
-    public Mur(int id, Coin c1, Coin c2)
+    public Mur(int id, Coin c1, Coin c2, Revetement revetement)
     {
         this.id = id;
         this.c1 = c1;
         this.c2 = c2;
+        this.revetement = revetement;
+        Sauveteur.add(this);
     }
     private int id;
     private Coin c1;
     private Coin c2;
     private Revetement revetement;
+    
+    
+    public double cout()
+    {
+        return revetement.cout(Coin.DistanceEntre(c1, c2) * 3);
+    }
+    public double longueur()
+    {
+        return Coin.DistanceEntre(c1, c2);
+    }
 
     public Revetement getRevetement() {
         return revetement;
@@ -42,6 +54,6 @@ public class Mur {
 
     @Override 
     public String toString() {
-        return "M" + id + "(" + c1 + ";" + c2 + ")";
+        return "M" + id + "(C" + c1.getId() + ";C" + c2.getId() + ";R" + revetement.getId() +")";
     }
 }

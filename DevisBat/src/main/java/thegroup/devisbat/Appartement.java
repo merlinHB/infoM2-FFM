@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package thegroup.devisbat;
 
 /**
@@ -10,27 +6,25 @@ package thegroup.devisbat;
  */
 public class Appartement {
 
-    public Appartement(int id, Piece[] pieces) {
+    public Appartement(int id, Niveau niveau, Piece[] pieces, String proprio) {
         this.id = id;
+        this.niveau = niveau;
         this.pieces = pieces;
+        this.proprio = proprio;
     }
     
-    int id;
-    Piece[] pieces;
-    String proprio;
+    private int id;
+    private Niveau niveau;
+    private Piece[] pieces;
+    private String proprio;
     
     public double surface()
     {
         double s = 0;
-        /*for(Piece p : pieces)
+        for(Piece p : pieces)
         {
-            s += p.sol.getCout();
-            s += p.getPlafond().GetCout();
-            for(Mur m : p.getMurs())
-            {
-                s += m.getRevetement().cout;
-            }
-        }*/
+            s += p.surfacePiece();
+        }
         return s;
     }
     
@@ -42,9 +36,9 @@ public class Appartement {
     public double devisAppartement()
     {
         double cout = 0;
-        /*for(Piece p : pieces){
-            //cout += p.;
-        }*/
+        for(Piece p : pieces){
+            cout += p.devisPiece();
+        }
         return cout;
     }
     

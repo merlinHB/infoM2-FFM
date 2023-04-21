@@ -5,20 +5,30 @@ import java.util.HashMap;
 
 public class Sauveteur
 {
-    private HashMap<String, Object> objets = new HashMap<>();
+    private static HashMap<String, Object> objets = new HashMap<>();
     
-    public void add(Object obj)
+    public static void add(Object obj)
     {
-        String index = obj.toString().replace("(","ù").split("ù")[0];
-        this.objets.put(index, obj);
+        boolean classeValide = obj.getClass() == Coin.class ||
+                               obj.getClass() == Mur.class ||
+                               obj.getClass() == Piece.class ||
+                               obj.getClass() == Appartement.class ||
+                               obj.getClass() == Plafond.class ||
+                               obj.getClass() == Sol.class;
+        if(classeValide)
+        {
+            String index = obj.toString().replace("(","ù").split("ù")[0];
+            Sauveteur.objets.put(index, obj);
+        }
+        
     }
     
-    public Object get(String s)
+    public static Object get(String s)
     {
-        return this.objets.get(s);
+        return Sauveteur.objets.get(s);
     }
     
-    public void Enregister(String nomDuFichier)
+    public static void Enregister(String nomDuFichier)
     {
         try
         {
@@ -28,6 +38,7 @@ public class Sauveteur
             for(Object obj : objets.values())
             {
                 bw.write(obj.toString() + "/");
+                System.out.println(obj.toString() + "/" + "Enregistré !");
             }
             bw.close();
         }
