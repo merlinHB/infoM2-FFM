@@ -9,23 +9,25 @@ public class Sauveteur
     
     public static void add(Object obj)
     {
-        boolean classeValide = obj.getClass() == Coin.class ||
-                               obj.getClass() == Mur.class ||
-                               obj.getClass() == Piece.class ||
-                               obj.getClass() == Appartement.class ||
-                               obj.getClass() == Plafond.class ||
-                               obj.getClass() == Sol.class;
-        if(classeValide)
-        {
-            String index = obj.toString().replace("(","ù").split("ù")[0];
-            Sauveteur.objets.put(index, obj);
-        }
-        
+        //String index = obj.toString().replace("(","ù").split("ù")[0];
+        String index = obj.toString().split("\\(")[0];
+        Sauveteur.objets.put(index, obj);
     }
     
     public static Object get(String s)
     {
         return Sauveteur.objets.get(s);
+    }
+    
+    public static void set(String s, Object obj)
+    {
+        if(Sauveteur.objets.containsKey(s))
+        {
+            Sauveteur.objets.replace(s, obj);
+        }else{
+            Sauveteur.objets.put(s, obj);
+        }
+        
     }
     
     public static void Enregister(String nomDuFichier)

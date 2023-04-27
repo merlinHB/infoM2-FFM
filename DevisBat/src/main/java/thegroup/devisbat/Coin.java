@@ -9,7 +9,16 @@ public class Coin {
         this.id = id;
         this.x = x;
         this.y = y;
-        Sauveteur.add(this);
+    }
+    
+    public Coin(int id, double x, double y, boolean save) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        if(save)
+        {
+            Sauveteur.add(this);
+        }
     }
     
     private int id;
@@ -31,10 +40,16 @@ public class Coin {
         return id;
     }
     
+    public String getTypeEtId()
+    {
+        return "C" + id;
+    }
+    
     public double getX() {
         return x;
     }
-
+    
+    //éviter d'appeler directement, changer depuis la piece si possible
     public void setX(double x) {
         this.x = x;
     }
@@ -42,7 +57,8 @@ public class Coin {
     public double getY() {
         return y;
     }
-
+    
+    //éviter d'appeler directement, changer depuis la piece si possible
     public void setY(double y) {
         this.y = y;
     }

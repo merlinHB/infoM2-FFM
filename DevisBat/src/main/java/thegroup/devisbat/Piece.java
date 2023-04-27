@@ -5,11 +5,15 @@ package thegroup.devisbat;
  * @author fscheer01
  */
 public class Piece {
-    public Piece(int id, Mur[] murs, Coin[] coins)
+    public Piece(int id, Mur[] murs)
     {
         this.id = id;
         this.murs = murs;
-        this.coins = coins;
+        this.coins = new Coin[4];
+        for(int i = 0; i<4; i++)
+        {
+            this.coins[i] = this.murs[i].getC1();
+        }
     }
     private int id;
     private Mur[] murs;
@@ -43,8 +47,35 @@ public class Piece {
         return surfacepiece;
     }
     
+    public void setCoin(int numero, Coin c)
+    {
+        int coin = numero%4;
+        int coinSuivant = (numero + 1)%4;
+        int coinPrecedent = (numero + 3)%4;
+        Sauveteur.set(coins[coin].getTypeEtId(), c);
+        coins[coin] = c;
+        murs[coin].setC1(c);
+        murs[coinPrecedent].setC2(c);
+        plafond.setSurface();
+        sol.setSurface();
+    }
+    
+    public Coin getCoin(int numero)
+    {
+        return coins[numero%4];
+    }
+    
+    public Mur getMur(int numero)
+    {
+        return murs[numero%4];
+    }
+    
     public int getId() {
         return id;
+    }
+    public String getTypeEtId()
+    {
+        return "Piece" + id;
     }
 
     @Override

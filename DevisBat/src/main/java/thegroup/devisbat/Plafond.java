@@ -16,7 +16,16 @@ public class Plafond{
         this.revetement = revetement;
         this.surface = piece.surfacePiece();
         this.id = id;
-        Sauveteur.add(this);
+    }
+    public Plafond(int id, Piece piece, Revetement revetement, boolean save) {
+        this.piece = piece;
+        this.revetement = revetement;
+        this.surface = piece.surfacePiece();
+        this.id = id;
+        if(save)
+        {
+            Sauveteur.add(this);
+        }
     }
     
     
@@ -31,8 +40,17 @@ public class Plafond{
         return revetement.cout(surface);
     }
     
-    public String getId() {
-        return String.valueOf(id);
+    public void setSurface() {
+        this.surface = piece.surfacePiece();
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public String getTypeEtId()
+    {
+        return "P" + id;
     }
     
     @Override
