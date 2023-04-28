@@ -1,1 +1,1 @@
-C3(2.0;9.0)/P0(Piece0;R4)/M0(C5;C1;R4)/M1(C1;C2;R4)/M2(C2;C3;R4)/M3(C3;C5;R4)/Piece0(M0;M1;M2;M3;S0;P0)/C5(8.0;9.0)/S0(Piece0;R1)/C1(8.0;3.0)/C2(2.0;3.0)/
+P0>>Piece0;Carrelage carre/ N0>>A0;/ M0>>C5;C1;Carrelage carre/ M1>>C1;C2;Carrelage carre/ M2>>C2;C3;Carrelage carre/ M3>>C3;C5;Carrelage carre/ C1>>-8.0;3.0/ B0>>N0;/ C2>>2.0;3.0/ A0>>Piece0;Proprio:Elon Musk/ C3>>2.0;9.0/ C5>>-8.0;9.0/ Piece0>>M0;M1;M2;M3;S0;P0/ S0>>Piece0;Defaut/ 

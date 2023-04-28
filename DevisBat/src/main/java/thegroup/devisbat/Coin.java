@@ -2,7 +2,7 @@ package thegroup.devisbat;
 
 import static java.lang.Math.sqrt;
 
-/*@author fplumet01*/
+
 public class Coin {
 
     public Coin(int id, double x, double y) {
@@ -33,7 +33,7 @@ public class Coin {
 
     @Override
     public String toString() {
-        return "C" + id + "(" + x + ";" + y + ")";
+        return "C" + id + ">>" + x + ";" + y;
     }
     
     public int getId() {

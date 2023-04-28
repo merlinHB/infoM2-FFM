@@ -29,5 +29,8 @@ public abstract class Revetement {
         return id;
     }
     
-    
+    public String getNom()
+    {
+        return nom;
+    }
 }

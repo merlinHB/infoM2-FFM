@@ -16,6 +16,7 @@ public class Sol{
         this.revetement = revetement;
         this.surface = piece.surfacePiece();
         this.id = id;
+        this.piece.setSol(this);
     }
     
     public Sol(int id, Piece piece, Revetement revetement, boolean save) {
@@ -23,6 +24,7 @@ public class Sol{
         this.revetement = revetement;
         this.surface = piece.surfacePiece();
         this.id = id;
+        this.piece.setSol(this);
         if(save)
         {
             Sauveteur.add(this);
@@ -48,7 +50,7 @@ public class Sol{
 
     @Override
     public String toString() {
-        return "S" + id +"(Piece" + piece.getId() + ";R" + revetement.getId() + ")";
+        return "S" + id +">>Piece" + piece.getId() + ";" + revetement.getNom();
     }
 
     public int getId() {

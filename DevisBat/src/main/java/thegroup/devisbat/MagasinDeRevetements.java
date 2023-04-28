@@ -78,7 +78,6 @@ public class MagasinDeRevetements {
     
     public static Revetement getRevetement(String nom)
     {
-        Revetement rev = isolants.get(nom);
         if(isolants.containsKey(nom))
         {
             return isolants.get(nom);
@@ -91,8 +90,8 @@ public class MagasinDeRevetements {
         }else 
         {
             System.out.println("Revetement '"+nom+"' non trouvé");
+            return revetements.get(0);
         }
-        return rev;
     }
     
     public static Revetement[] getListeDeRevetement()

@@ -16,12 +16,14 @@ public class Plafond{
         this.revetement = revetement;
         this.surface = piece.surfacePiece();
         this.id = id;
+        this.piece.setPlafond(this);
     }
     public Plafond(int id, Piece piece, Revetement revetement, boolean save) {
         this.piece = piece;
         this.revetement = revetement;
         this.surface = piece.surfacePiece();
         this.id = id;
+        this.piece.setPlafond(this);
         if(save)
         {
             Sauveteur.add(this);
@@ -55,6 +57,6 @@ public class Plafond{
     
     @Override
     public String toString() {
-        return "P" + id +"(Piece" + piece.getId() + ";R" + revetement.getId() + ")";
+        return "P" + id +">>Piece" + piece.getId() + ";" + revetement.getNom();
     }
 }

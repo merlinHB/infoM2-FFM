@@ -88,6 +88,6 @@ public class Mur {
 
     @Override 
     public String toString() {
-        return "M" + id + "(C" + c1.getId() + ";C" + c2.getId() + ";R" + revetement.getId() +")";
+        return "M" + id + ">>C" + c1.getId() + ";C" + c2.getId() + ";" + revetement.getNom();
     }
 }

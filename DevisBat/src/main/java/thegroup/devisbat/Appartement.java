@@ -1,20 +1,23 @@
 package thegroup.devisbat;
 
-/**
- *
- * @author fplumet01
- */
+
 public class Appartement {
 
-    public Appartement(int id, Niveau niveau, Piece[] pieces, String proprio) {
+    public Appartement(int id, Piece[] pieces, String proprio) {
         this.id = id;
-        this.niveau = niveau;
         this.pieces = pieces;
         this.proprio = proprio;
     }
+    public Appartement(int id, Piece[] pieces, String proprio, boolean save) {
+        this.id = id;
+        this.pieces = pieces;
+        this.proprio = proprio;
+        if(save){
+            Sauveteur.add(this);
+        }
+    }
     
     private int id;
-    private Niveau niveau;
     private Piece[] pieces;
     private String proprio;
     
@@ -52,6 +55,11 @@ public class Appartement {
     public int getId() {
         return id;
     }
+    
+    public String getTypeEtId()
+    {
+        return "A" + id;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -59,6 +67,16 @@ public class Appartement {
 
     public Piece[] getPieces() {
         return pieces;
+    }
+    
+    public Piece getPiece(int numero)
+    {
+        return pieces[numero%pieces.length];
+    }
+    
+    public void setPiece(int numero, Piece piece)
+    {
+        pieces[numero%pieces.length] = piece;
     }
 
     public void setPieces(Piece[] pieces) {
@@ -72,4 +90,19 @@ public class Appartement {
     public void setProprio(String proprio) {
         this.proprio = proprio;
     }
+    
+    
+
+    @Override
+    public String toString() {
+        String s = "A" + id + ">>";
+        for(int i = 0; i<pieces.length; i++)
+        {
+            s += pieces[i].getTypeEtId() + ";";
+        }
+        s += "Proprio:" + proprio;
+        return s;
+    }
+    
+    
 }

@@ -7,20 +7,15 @@ public class DevisBat {
         //test revetements
         MagasinDeRevetements.LireRevetements();
         
-        System.out.println("/***Début du programme de test***/");
+        System.out.println("\n/***Début du programme de test***/\n");
         
-        Carrelage carrelage = MagasinDeRevetements.getCarrelage("Carrelage carre");
-        System.out.println(carrelage + ", " + carrelage.getId());
-        
-        System.out.println(MagasinDeRevetements.getRevetement(3));
-        System.out.println(MagasinDeRevetements.getRevetement("Rouge"));
         
         
         //test trucs de base
         System.out.println("coordonnées du coin 1 : (0;0)");
         Coin c1 = new Coin(0,0,0, true);
         System.out.println("coordonnées du coin opposé (coin 3/diagonale)");
-        Coin c3 = new Coin(2, Lire.d(), Lire.d(), true);
+        Coin c3 = new Coin(2, 2, 3, true);
         Coin c2 = new Coin(1, c1.getX(), c3.getY(), true);
         Coin c4 = new Coin(3, c3.getX(), c1.getY(), true);
         System.out.println("coin 2 : " + c2);
@@ -36,19 +31,23 @@ public class DevisBat {
         Piece p1 = new Piece(0, new Mur[]{m1, m2, m3, m4});
         Sol s1 = new Sol(0, p1, MagasinDeRevetements.getCarrelage("Test"), true);
         Plafond plaf1 = new Plafond(0, p1, revs[4], true);
-        p1.setSol(s1);
-        p1.setPlafond(plaf1);
         Sauveteur.add(p1);
         
+        Appartement appart1 = new Appartement(0, new Piece[]{p1},"Elon Musk", true);
+        Niveau n1 = new Niveau(0, new Appartement[]{appart1}, true);
+        Batiment bat1 = new Batiment(0, new Niveau[]{n1}, true);
+        
+        p1.setCoin(0, new Coin(5, -8, 9));
         
         Sauveteur.Enregister("Enregistrement.devisEnregistre");
         
-        p1.setCoin(0, new Coin(5, 8, 9));
+        System.out.println("La piece coute " + p1.devisPiece() + " euros");
+        System.out.println("L'appart coute " + appart1.devisAppartement() + " euros");
+        System.out.println("Le niveau coute " + n1.devisNiveau() + " euros");
+        System.out.println("Le bat coute " + bat1.devisBatiment() + " euros");
         
-        System.out.println("Le plafond coute " + plaf1.cout() + "euros (surface :" + p1.surfacePiece() + "m2)");
-        System.out.println("Piece p1 créée : " + p1);
-        System.out.println("La piece coute " + p1.devisPiece() + "euros");
-        
+        Sauveteur.Ouvrir("Enregistrement.devisEnregistre");
+        System.out.println("\nNouvel enregistrement \n");
         Sauveteur.Enregister("Enregistrement.devisEnregistre");
     }
 }

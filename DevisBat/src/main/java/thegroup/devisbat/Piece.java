@@ -80,12 +80,12 @@ public class Piece {
 
     @Override
     public String toString() {
-        String s = "Piece" + id + "(";
+        String s = "Piece" + id + ">>";
         for(int i = 0; i<4; i++)
         {
             s += "M" + murs[i].getId() + ";";
         }
-        s += "S" + sol.getId() + ";P" + plafond.getId() + ")";
+        s += "S" + sol.getId() + ";P" + plafond.getId();
         return s;
     }
 }
