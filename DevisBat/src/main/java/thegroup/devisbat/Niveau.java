@@ -1,22 +1,25 @@
 package thegroup.devisbat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Niveau {
     
     public Niveau(int id, Appartement[] appartements) {
         this.id = id;
-        this.appartements = appartements;
+        this.appartements = new ArrayList<Appartement>(Arrays.asList(appartements));
     }
     
     public Niveau(int id, Appartement[] appartements, boolean save) {
         this.id = id;
-        this.appartements = appartements;
+        this.appartements = new ArrayList<Appartement>(Arrays.asList(appartements));
         if(save){
             Sauveteur.add(this);
         }
     }
     
     private int id;
-    private Appartement[] appartements;
+    private ArrayList<Appartement> appartements;
 
     public double devisNiveau()
     {
@@ -49,9 +52,9 @@ public class Niveau {
     @Override
     public String toString() {
         String s = "N" + id + ">>";
-        for(int i = 0; i<appartements.length; i++)
+        for(Appartement a : appartements)
         {
-            s += appartements[i].getTypeEtId() + ";";
+            s += a.getTypeEtId() + ";";
         }
         return s;
     }

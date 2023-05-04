@@ -1,16 +1,19 @@
 package thegroup.devisbat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class Appartement {
 
     public Appartement(int id, Piece[] pieces, String proprio) {
         this.id = id;
-        this.pieces = pieces;
+        this.pieces = new ArrayList<Piece>(Arrays.asList(pieces));
         this.proprio = proprio;
     }
     public Appartement(int id, Piece[] pieces, String proprio, boolean save) {
         this.id = id;
-        this.pieces = pieces;
+        this.pieces = new ArrayList<Piece>(Arrays.asList(pieces));
         this.proprio = proprio;
         if(save){
             Sauveteur.add(this);
@@ -18,7 +21,7 @@ public class Appartement {
     }
     
     private int id;
-    private Piece[] pieces;
+    private ArrayList<Piece> pieces;
     private String proprio;
     
     public double surface()
@@ -48,10 +51,6 @@ public class Appartement {
     
     
     
-    
-    
-    
-    
     public int getId() {
         return id;
     }
@@ -66,20 +65,20 @@ public class Appartement {
     }
 
     public Piece[] getPieces() {
-        return pieces;
+        return (Piece[])pieces.toArray();
     }
     
     public Piece getPiece(int numero)
     {
-        return pieces[numero%pieces.length];
+        return pieces.get(numero%pieces.size());
     }
     
     public void setPiece(int numero, Piece piece)
     {
-        pieces[numero%pieces.length] = piece;
+        pieces.set(numero%pieces.size(),piece);
     }
 
-    public void setPieces(Piece[] pieces) {
+    public void setPieces(ArrayList<Piece> pieces) {
         this.pieces = pieces;
     }
 
@@ -96,9 +95,9 @@ public class Appartement {
     @Override
     public String toString() {
         String s = "A" + id + ">>";
-        for(int i = 0; i<pieces.length; i++)
+        for(Piece p : pieces)
         {
-            s += pieces[i].getTypeEtId() + ";";
+            s += p.getTypeEtId() + ";";
         }
         s += "Proprio:" + proprio;
         return s;

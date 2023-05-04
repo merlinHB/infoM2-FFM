@@ -1,23 +1,26 @@
 package thegroup.devisbat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class Batiment {
 
     public Batiment(int id, Niveau[] niveaux) {
         this.id = id;
-        this.niveaux = niveaux;
+        this.niveaux = new ArrayList<Niveau>(Arrays.asList(niveaux));
     }
     
     public Batiment(int id, Niveau[] niveaux, boolean save) {
         this.id = id;
-        this.niveaux = niveaux;
+        this.niveaux = new ArrayList<Niveau>(Arrays.asList(niveaux));
         if(save){
             Sauveteur.add(this);
         }
     }
     
     private int id;
-    private Niveau[] niveaux;
+    private ArrayList<Niveau> niveaux;
     
     public double devisBatiment()
     {
@@ -46,32 +49,32 @@ public class Batiment {
     }
 
     public Niveau[] getNiveaux() {
-        return niveaux;
+        return (Niveau[])niveaux.toArray();
     }
 
     public void setNiveaux(Niveau[] niveaux) {
-        this.niveaux = niveaux;
+        this.niveaux = new ArrayList<Niveau>(Arrays.asList(niveaux));
     }
     
     public Niveau getNiveau(int numero) {
-        return niveaux[numero%niveaux.length];
+        return niveaux.get(numero%niveaux.size());
     }
 
     public void setNiveaux(int numero, Niveau niveau) {
-        niveaux[numero%niveaux.length] = niveau;
+        niveaux.set(numero%niveaux.size(), niveau);
     }
     
     public int getNbrNiveaux()
     {
-        return niveaux.length;
+        return niveaux.size();
     }
 
     @Override
     public String toString() {
         String s = "B" + id + ">>";
-        for(int i = 0; i<niveaux.length; i++)
+        for(Niveau nv : niveaux)
         {
-            s += niveaux[i].getTypeEtId() + ";";
+            s += nv.getTypeEtId() + ";";
         }
         return s;
     }

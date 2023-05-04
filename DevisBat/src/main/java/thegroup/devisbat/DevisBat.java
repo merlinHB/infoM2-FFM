@@ -1,5 +1,6 @@
 package thegroup.devisbat;
 
+
 public class DevisBat {
 
     public static void main(String[] args) 
@@ -46,8 +47,8 @@ public class DevisBat {
         System.out.println("Le niveau coute " + n1.devisNiveau() + " euros");
         System.out.println("Le bat coute " + bat1.devisBatiment() + " euros");
         
-        Sauveteur.Ouvrir("Enregistrement.devisEnregistre");
+        Sauveteur.Ouvrir("Enregistrement2.devisEnregistre");
         System.out.println("\nNouvel enregistrement \n");
-        Sauveteur.Enregister("Enregistrement.devisEnregistre");
+        Sauveteur.Enregister("Enregistrement2.devisEnregistre");
     }
 }
