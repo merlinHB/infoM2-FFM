@@ -71,8 +71,8 @@ public class JavaFX_Menus extends Application {
 
         
 
-        VBox vBox = new VBox(menuBar);
-        VBox vBox2 = new VBox(canvas);
+        VBox vBox = new VBox(menuBar, canvas);
+       // VBox vBox2 = new VBox(canvas);
 // File Chooser
     FileChooser fileChooser = new FileChooser();
         

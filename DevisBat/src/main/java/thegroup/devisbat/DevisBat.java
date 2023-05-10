@@ -14,7 +14,7 @@ public class DevisBat {
         
         //test trucs de base
         System.out.println("coordonnées du coin 1 : (0;0)");
-        Coin c1 = new Coin(0,0,0, true);
+        Coin c1 = new Coin(0,50,50, true);
         System.out.println("coordonnées du coin opposé (coin 3/diagonale)");
         Coin c3 = new Coin(2, 2, 3, true);
         Coin c2 = new Coin(1, c1.getX(), c3.getY(), true);
