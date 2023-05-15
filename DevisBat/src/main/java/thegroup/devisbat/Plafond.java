@@ -1,5 +1,4 @@
 package thegroup.devisbat;
-package thegroup.devisbat;
 
 /**
  *
