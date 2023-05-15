@@ -1,93 +1,44 @@
 package thegroup.devisbat;
 
-public class Mur {
-    public Mur(int id, Coin c1, Coin c2, Revetement revetement)
-    {
-        this.id = id;
-        this.c1 = c1;
-        this.c2 = c2;
-        this.revetement = revetement;
-        this.horizontal = c1.getY() == c2.getY();
-    }
-    
-    public Mur(int id, Coin c1, Coin c2, Revetement revetement, boolean save)
-    {
-        this.id = id;
-        this.c1 = c1;
-        this.c2 = c2;
-        this.revetement = revetement;
-        this.horizontal = c1.getY() == c2.getY();
-        if(save){
-            Sauveteur.add(this);
-        }
-    }
-    
-    private int id;
-    private Coin c1;
-    private Coin c2;
-    private Revetement revetement;
-    private boolean horizontal;
-    
-    
-    public double cout()
-    {
-        return revetement.cout(Coin.DistanceEntre(c1, c2) * 3);
-    }
-    public double longueur()
-    {
-        return Coin.DistanceEntre(c1, c2);
-    }
 
-    public Revetement getRevetement() {
-        return revetement;
-    }
+public class DevisBat {
 
-    public void setRevetement(Revetement revetement) {
-        this.revetement = revetement;
-    }
-
-    public Coin getC1() {
-        return c1;
-    }
-    
-    //éviter d'appeler directement, changer depuis la piece si possible
-    public void setC1(Coin c1) {
-        this.c1 = c1;
-        if(horizontal)
+    public static void main(String[] args) 
+    {
+        //test revetements
+        MagasinDeRevetements.LireRevetements();
+        
+        System.out.println("\n/***Début du programme de test***/\n");
+        
+        
+        
+        //test trucs de base
+        Coin c1 = new Coin(0,0,0);
+        Coin c3 = new Coin(2, 5, 10);
+        Coin c2 = new Coin(1, c1.getX(), c3.getY());
+        Coin c4 = new Coin(3, c3.getX(), c1.getY());
+        Coin c5 = new Coin(4, c3.getX(), 5);
+        
+        
+        Mur m1 = new Mur(0, c1, c2, MagasinDeRevetements.getRevetement(4));
+        Mur m2 = new Mur(1, c2, c3, MagasinDeRevetements.getRevetement(4));
+        Mur m3 = new Mur(2, c3, c5, MagasinDeRevetements.getRevetement(4));
+        Mur m4 = new Mur(3, c5, c4, MagasinDeRevetements.getRevetement(4));
+        Mur m5 = new Mur(4, c4, c1, MagasinDeRevetements.getRevetement(4));
+        
+        Piece p1 = new Piece(0, new Mur[]{m1, m2, m3, m4, m5});
+        Sol s1 = new Sol(0, p1, MagasinDeRevetements.getRevetement(4));
+        Plafond plaf1 = new Plafond(0, p1, MagasinDeRevetements.getRevetement(4));
+        for(int i = 0; i<p1.nbrMurs(); i++)
         {
-            c2.setY(c1.getY());
-        }else{
-            c2.setX(c1.getX());
+            System.out.println("mur " + i + " : " + p1.getMur(i));
+            System.out.println("coin " + i + " : " + p1.getCoin(i));
         }
-    }
-
-    public Coin getC2() {
-        return c2;
-    }
-    
-    //éviter d'appeler directement, changer depuis la piece si possible
-    public void setC2(Coin c2) {
-        this.c2 = c2;
-        if(horizontal)
+        p1.setCoin(2, 6, 11);
+        for(int i = 0; i<p1.nbrMurs(); i++)
         {
-            c1.setY(c2.getY());
-        }else{
-            c1.setX(c2.getX());
+            System.out.println("mur " + i + " : " + p1.getMur(i));
+            System.out.println("coin " + i + " : " + p1.getCoin(i));
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-    
-    
-    public String getTypeEtId()
-    {
-        return "M" + id;
-    }
-
-    @Override 
-    public String toString() {
-        return "M" + id + ">>C" + c1.getId() + ";C" + c2.getId() + ";" + revetement.getNom();
     }
 }
