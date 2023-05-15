@@ -20,7 +20,7 @@ public class CanvasExemple extends Application {
             stage.show();
     }
     
-    public static void canvasexemple(String[] args) {
+    public static void main(String[] args) {
         launch();
     }
 }

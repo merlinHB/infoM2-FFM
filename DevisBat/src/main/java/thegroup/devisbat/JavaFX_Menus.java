@@ -5,7 +5,9 @@ package  thegroup.devisbat;
 /**
  * JavaFX App
  */
+import java.awt.event.MouseEvent;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -23,6 +25,8 @@ public class JavaFX_Menus extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
+    Coin c1 = new Coin(0 ,0, 0, true);
 
     @Override
     public void start(Stage primaryStage) {
@@ -61,13 +65,17 @@ public class JavaFX_Menus extends Application {
         canvas.setHeight(512);
         canvas.setWidth(512);
         
-        GraphicsContext graphicsContext2D = canvas.getGraphicsContext2D();
+       
+       GraphicsContext graphicsContext2D = canvas.getGraphicsContext2D();
+       graphicsContext2D.fillOval(c1.getX(), c1.getY(), 10, 10);
+       
+       
 
-        graphicsContext2D.setFill(Color.valueOf("#ff0000"));
-        graphicsContext2D.fillRect(100, 100, 200, 200);
+        //graphicsContext2D.setFill(Color.valueOf("#ff0000"));
+        //graphicsContext2D.fill(100, 100, 200, 200);
 
-        graphicsContext2D.setStroke(Color.valueOf("#0000ff"));
-        graphicsContext2D.strokeRect(200, 200, 200, 200);
+        //graphicsContext2D.setStroke(Color.valueOf("#0000ff"));
+        //graphicsContext2D.strokeRect(200, 200, 200, 200);
 
         
 
