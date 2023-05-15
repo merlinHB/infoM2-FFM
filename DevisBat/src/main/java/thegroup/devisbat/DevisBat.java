@@ -13,42 +13,32 @@ public class DevisBat {
         
         
         //test trucs de base
-        System.out.println("coordonnées du coin 1 : (0;0)");
-        Coin c1 = new Coin(0,50,50, true);
-        System.out.println("coordonnées du coin opposé (coin 3/diagonale)");
-        Coin c3 = new Coin(2, 2, 3, true);
-        Coin c2 = new Coin(1, c1.getX(), c3.getY(), true);
-        Coin c4 = new Coin(3, c3.getX(), c1.getY(), true);
-        System.out.println("coin 2 : " + c2);
-        System.out.println("coin 4 : " + c4);
+        Coin c1 = new Coin(0,0,0);
+        Coin c3 = new Coin(2, 5, 10);
+        Coin c2 = new Coin(1, c1.getX(), c3.getY());
+        Coin c4 = new Coin(3, c3.getX(), c1.getY());
+        Coin c5 = new Coin(4, c3.getX(), 5);
         
-        Revetement[] revs = MagasinDeRevetements.getListeDeRevetement();
         
-        Mur m1 = new Mur(0, c1, c2, revs[4], true);
-        Mur m2 = new Mur(1, c2, c3, revs[4], true);
-        Mur m3 = new Mur(2, c3, c4, revs[4], true);
-        Mur m4 = new Mur(3, c4, c1, revs[4], true);
+        Mur m1 = new Mur(0, c1, c2, MagasinDeRevetements.getRevetement(4));
+        Mur m2 = new Mur(1, c2, c3, MagasinDeRevetements.getRevetement(4));
+        Mur m3 = new Mur(2, c3, c5, MagasinDeRevetements.getRevetement(4));
+        Mur m4 = new Mur(3, c5, c4, MagasinDeRevetements.getRevetement(4));
+        Mur m5 = new Mur(4, c4, c1, MagasinDeRevetements.getRevetement(4));
         
-        Piece p1 = new Piece(0, new Mur[]{m1, m2, m3, m4});
-        Sol s1 = new Sol(0, p1, MagasinDeRevetements.getCarrelage("Test"), true);
-        Plafond plaf1 = new Plafond(0, p1, revs[4], true);
-        Sauveteur.add(p1);
-        
-        Appartement appart1 = new Appartement(0, new Piece[]{p1},"Elon Musk", true);
-        Niveau n1 = new Niveau(0, new Appartement[]{appart1}, true);
-        Batiment bat1 = new Batiment(0, new Niveau[]{n1}, true);
-        
-        p1.setCoin(0, new Coin(5, -8, 9));
-        
-        Sauveteur.Enregister("Enregistrement.devisEnregistre");
-        
-        System.out.println("La piece coute " + p1.devisPiece() + " euros");
-        System.out.println("L'appart coute " + appart1.devisAppartement() + " euros");
-        System.out.println("Le niveau coute " + n1.devisNiveau() + " euros");
-        System.out.println("Le bat coute " + bat1.devisBatiment() + " euros");
-        
-        Sauveteur.Ouvrir("Enregistrement2.devisEnregistre");
-        System.out.println("\nNouvel enregistrement \n");
-        Sauveteur.Enregister("Enregistrement2.devisEnregistre");
+        Piece p1 = new Piece(0, new Mur[]{m1, m2, m3, m4, m5});
+        Sol s1 = new Sol(0, p1, MagasinDeRevetements.getRevetement(4));
+        Plafond plaf1 = new Plafond(0, p1, MagasinDeRevetements.getRevetement(4));
+        for(int i = 0; i<p1.nbrMurs(); i++)
+        {
+            System.out.println("mur " + i + " : " + p1.getMur(i));
+            System.out.println("coin " + i + " : " + p1.getCoin(i));
+        }
+        p1.setCoin(2, 6, 11);
+        for(int i = 0; i<p1.nbrMurs(); i++)
+        {
+            System.out.println("mur " + i + " : " + p1.getMur(i));
+            System.out.println("coin " + i + " : " + p1.getCoin(i));
+        }
     }
 }
