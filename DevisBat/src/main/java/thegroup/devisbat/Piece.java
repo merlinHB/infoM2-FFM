@@ -1,5 +1,8 @@
 package thegroup.devisbat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author fscheer01
@@ -8,19 +11,18 @@ public class Piece {
     public Piece(int id, Mur[] murs)
     {
         this.id = id;
-        this.murs = murs;
-        this.coins = new Coin[4];
-        for(int i = 0; i<4; i++)
-        {
-            this.coins[i] = this.murs[i].getC1();
-        }
+        this.murs = new ArrayList<Mur>(Arrays.asList(murs));
     }
     private int id;
-    private Mur[] murs;
-    private Coin[] coins;
+    private ArrayList<Mur> murs;
     
     private Sol sol;
     private Plafond plafond;
+    
+    public int nbrMurs()
+    {
+        return murs.size();
+    }
     
     public void setSol(Sol sol)
     {
@@ -42,32 +44,52 @@ public class Piece {
         return cout;
     }
     
-    public double surfacePiece() {
-        double surfacepiece = murs[0].longueur() * murs[1].longueur();
-        return surfacepiece;
+    public double surfacePiece(){
+        double l1 = murs.get(0).longueur();
+        int i = 0;
+        while(murs.get(i).estHorizontal() == murs.get((i + 1)%murs.size()).estHorizontal())
+        {
+            l1 += murs.get((i + 1)%murs.size()).longueur();
+            i++;
+        }
+        i++;
+        double l2 = murs.get(i%murs.size()).longueur();
+        while(murs.get(i).estHorizontal() == murs.get((i + 1)%murs.size()).estHorizontal())
+        {
+            l2 += murs.get((i + 1)%murs.size()).longueur();
+            i++;
+        }
+        return l1 * l2;
     }
     
-    public void setCoin(int numero, Coin c)
+    public void setCoin(int numero, double x, double y)
     {
-        int coin = numero%4;
-        int coinSuivant = (numero + 1)%4;
-        int coinPrecedent = (numero + 3)%4;
-        Sauveteur.set(coins[coin].getTypeEtId(), c);
-        coins[coin] = c;
-        murs[coin].setC1(c);
-        murs[coinPrecedent].setC2(c);
-        plafond.setSurface();
-        sol.setSurface();
+//        ArrayList<Coin> coinsH;//coins reliés horizontalement au coin qu'on replace
+//        ArrayList<Coin> coinsV;//idem mais verticalement
+//        int i = 0;
+//        while(murs.get(i).estHorizontal() == murs.get((i + 1)%murs.size()).estHorizontal())
+//        {
+//            if(murs.get(i).estHorizontal())
+//            {
+//                murs.get(i).setC1(murs.get(i).getId(), );
+//            }
+//            l2 += murs.get((i + 1)%murs.size()).longueur();
+//            i++;
+//        }
+        int coin = numero%murs.size();
+        int coinPrecedent = (numero + murs.size() - 1)%murs.size();
+        murs.get(coin).setC1(x, y);
+        murs.get(coinPrecedent).setC2(x, y);
     }
     
     public Coin getCoin(int numero)
     {
-        return coins[numero%4];
+        return murs.get(numero%murs.size()).getC1();
     }
     
     public Mur getMur(int numero)
     {
-        return murs[numero%4];
+        return murs.get(numero%murs.size());
     }
     
     public int getId() {
@@ -81,9 +103,9 @@ public class Piece {
     @Override
     public String toString() {
         String s = "Piece" + id + ">>";
-        for(int i = 0; i<4; i++)
+        for(Mur m : murs)
         {
-            s += "M" + murs[i].getId() + ";";
+            s += "M" + m.getId() + ";";
         }
         s += "S" + sol.getId() + ";P" + plafond.getId();
         return s;
