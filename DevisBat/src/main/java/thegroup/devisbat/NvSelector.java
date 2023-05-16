@@ -28,9 +28,7 @@ public class NvSelector extends VBox{
         nvNvBtn = new Button(" + ");
         nvNvBtn.setPrefSize(100, 50);
         nvNvBtn.setOnAction(eventNvNv);
-        
         super.getChildren().add(nvNvBtn);
-        addBtnNv("Niveau 1");
     }
     
     private Button nvNvBtn;
@@ -39,29 +37,35 @@ public class NvSelector extends VBox{
     
     //listeCanvas.add(JavaFX_Menus.dc);
     
-    public void addBtnNv(String txt)
+    public void addNv(int num)
     {
-        Button nvnv = new Button(txt);
+        Button nvnv = new Button("Niveau" + num);
         nvnv.setPrefSize(100, 50);
         nvnv.setOnAction(eventNvClicked);
         getChildren().add(0, nvnv);
+        
+        DessinCanvas niveau = new DessinCanvas();
+        listeCanvas.add(0, niveau);
+        
+        goToNv(num, 0);
+    }
+    
+    public void goToNv(int num, int idNv)
+    {
+        JavaFX_Menus.layout.setCenter(listeCanvas.get(idNv));
     }
     
     EventHandler<ActionEvent> eventNvNv = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            addBtnNv("Niveau " + getChildren().size());
-            DessinCanvas niveau = new DessinCanvas(512, 512);
-            listeCanvas.add(niveau);
+            addNv(getChildren().size());
         }
     };
     
     EventHandler<ActionEvent> eventNvClicked = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            System.out.println("Bouton nv " + (getChildren().size() - getChildren().indexOf(e.getSource()) - 1));
-            JavaFX_Menus.layout.setCenter(listeCanvas.get(1));
-           
+            goToNv(getChildren().size() - getChildren().indexOf(e.getSource()) - 1, getChildren().indexOf(e.getSource()));
         }
     };
 }
