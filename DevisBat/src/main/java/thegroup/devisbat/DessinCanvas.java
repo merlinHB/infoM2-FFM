@@ -9,6 +9,7 @@ import java.util.Arrays;
 import javafx.collections.ObservableList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.event.*;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -24,9 +25,10 @@ public class DessinCanvas extends Pane{
     
     public static double rayonPoint = 5;
     public static double epaisseurTrait = 2;
-    public static double scrollSensi = 0.01;
+    public static double scrollSensi = 0.5;
     
-    private double zoom;
+    private static double pixelsParMetre = 100;
+    private static Point2D origine = Point2D.ZERO;//coos de l'origine reelle en coos ecran 
     private double[] initPos;
     
     private double maxX = 512;
@@ -41,23 +43,35 @@ public class DessinCanvas extends Pane{
         this.setMaxSize(maxX, maxY);
         children = getChildren();
         
-        DessinRectangle(0,0,maxX,maxY,true);
+        origine = new Point2D(256,256);
+        
+        //DessinRectangle(origine.x, origine.y, realToScreenPos(0.6, 1.2).x, realToScreenPos(0.6, 1.2).y, true);
+        
         
         setStyle("-fx-background-color: #fff9ea");
     }
     
+    public void DessinerCoinsPiece(Piece p)
+    {
+        for(Coin c : p.getCoins())
+        {
+            Point2D coo = realToScreenPos(c.getX(), c.getY());
+            DessinPoint(coo.getX(), coo.getY());
+        }
+    }
+    
     public void DessinPoint(double x, double y)
     {
-        gc.strokeOval(x - rayonPoint, y - rayonPoint, rayonPoint*2, rayonPoint*2);
+        Circle c = new Circle(x,y,rayonPoint);
+        c.setFill(Color.TRANSPARENT);
+        c.setStroke(Color.BLACK);
+        c.setStrokeWidth(epaisseurTrait);
+        children.add(c);
     }
     
     public void DessinRectangle(double xa, double ya, double xz, double yz, boolean add)
     {
         double[] coos = {xa, ya,    xa, yz,     xz, yz,     xz, ya};
-        for(double d : coos)
-        {
-            d *= zoom;
-        }
         Polygon r = new Polygon(coos);
         r.setFill(Color.TRANSPARENT);
         r.setStroke(Color.BLACK);
@@ -69,6 +83,25 @@ public class DessinCanvas extends Pane{
             children.set(children.size() - 1, r);
         }
     }
+    
+    public void CreerPiece(int id, double xa, double ya, double xz, double yz)
+    {
+        ArrayList<Coin> coins = new ArrayList<Coin>();
+        coins.add(new Coin(MainProg.GenererId(), xa, ya));
+        coins.add(new Coin(MainProg.GenererId(), xa, yz));
+        coins.add(new Coin(MainProg.GenererId(), xz, yz));
+        coins.add(new Coin(MainProg.GenererId(), xz, ya));
+        MainProg.tempPieces.add(new Piece(id, (Coin[])coins.toArray()));
+    }
+//    public void CreerPiece(int id, double xa, double ya, double xz, double yz, int idDansListe)
+//    {
+//        ArrayList<Coin> coins = new ArrayList<Coin>();
+//        coins.add(new Coin(MainProg.GenererId(), xa, ya));
+//        coins.add(new Coin(MainProg.GenererId(), xa, yz));
+//        coins.add(new Coin(MainProg.GenererId(), xz, yz));
+//        coins.add(new Coin(MainProg.GenererId(), xz, ya));
+//        MainProg.tempPieces.set(idDansListe, new Piece(id, (Coin[])coins.toArray()));
+//    }
 //    
 //    public void DessinRectangle(double xa, double ya, double xz, double yz, int id)
 //    {
@@ -84,10 +117,26 @@ public class DessinCanvas extends Pane{
         
     }
     
+    public Point2D realToScreenPos(double x, double y)
+    {
+        Point2D coos = new Point2D(x, y);
+        coos.multiply(pixelsParMetre);
+        coos.add(origine);
+        return coos;
+    }
+    
+    public Point2D screenToRealPos(double x, double y)
+    {
+        Point2D coos = new Point2D(x, y);
+        coos.subtract(origine);
+        coos.multiply(1/pixelsParMetre);
+        return coos;
+    }
+    
     EventHandler<MouseEvent> eventClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent e)
         {
-            switch(JavaFX_Menus.mode) {
+            switch(MainProg.mode) {
                 case 'p':
                     initPos = new double[]{e.getX(), e.getY()};
                     DessinRectangle(initPos[0], initPos[1], e.getX(), e.getY(), true);
@@ -109,7 +158,7 @@ public class DessinCanvas extends Pane{
         {
             double x = Double.max(0, Double.min(e.getX(), maxX));
             double y = Double.max(0, Double.min(e.getY(), maxY));
-            switch(JavaFX_Menus.mode) {
+            switch(MainProg.mode) {
                 case 'p':
                     DessinRectangle(initPos[0], initPos[1], x, y, false);
                     break;
@@ -135,8 +184,7 @@ public class DessinCanvas extends Pane{
     EventHandler<ScrollEvent> eventScrolled = new EventHandler<ScrollEvent>() {
         public void handle(ScrollEvent e)
         {
-            zoom += e.getDeltaY() * scrollSensi;
-            System.out.println(zoom);
+            pixelsParMetre += e.getDeltaY() * scrollSensi;
         }
     };
 }

@@ -35,7 +35,7 @@ public class NvSelector extends VBox{
     public static ArrayList<DessinCanvas> listeCanvas = new ArrayList<DessinCanvas>();
   
     
-    //listeCanvas.add(JavaFX_Menus.dc);
+    //listeCanvas.add(MainProg.dc);
     
     public void addNv(int num)
     {
@@ -52,7 +52,7 @@ public class NvSelector extends VBox{
     
     public void goToNv(int num, int idNv)
     {
-        JavaFX_Menus.layout.setCenter(listeCanvas.get(idNv));
+        MainProg.layout.setCenter(listeCanvas.get(idNv));
     }
     
     EventHandler<ActionEvent> eventNvNv = new EventHandler<ActionEvent>() {

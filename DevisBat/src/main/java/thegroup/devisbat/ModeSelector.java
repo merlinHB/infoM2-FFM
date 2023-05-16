@@ -37,21 +37,21 @@ public class ModeSelector extends HBox{
     EventHandler<ActionEvent> eventCreerPiece = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            JavaFX_Menus.mode = 'p';
+            MainProg.mode = 'p';
         }
     };
     
     EventHandler<ActionEvent> eventModPiece = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            JavaFX_Menus.mode = 'm';
+            MainProg.mode = 'm';
         }
     };
     
     EventHandler<ActionEvent> eventGomme = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            JavaFX_Menus.mode = 'g';
+            MainProg.mode = 'g';
         }
     };
 }

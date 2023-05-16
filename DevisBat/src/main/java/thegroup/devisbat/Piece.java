@@ -13,6 +13,15 @@ public class Piece {
         this.id = id;
         this.murs = new ArrayList<Mur>(Arrays.asList(murs));
     }
+    public Piece(int id, Coin[] coins)
+    {
+        this.id = id;
+        this.murs = new ArrayList<Mur>();
+        for(int i =0; i<coins.length; i++)
+        {
+            this.murs.add(new Mur(coins[i].getId(), coins[i], coins[(i+1)%coins.length], MagasinDeRevetements.getRevetement(0)));
+        }
+    }
     private int id;
     private ArrayList<Mur> murs;
     
@@ -85,6 +94,16 @@ public class Piece {
     public Coin getCoin(int numero)
     {
         return murs.get(numero%murs.size()).getC1();
+    }
+    
+    public Coin[] getCoins()
+    {
+        Coin[] coins = new Coin[murs.size()];
+        for(int i =0; i<murs.size(); i++)
+        {
+            coins[i] = murs.get(i).getC1();
+        }
+        return coins;
     }
     
     public Mur getMur(int numero)

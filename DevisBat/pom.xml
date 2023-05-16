@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <exec.mainClass>thegroup.devisbat.JavaFX_Menus</exec.mainClass>
+        <exec.mainClass>thegroup.devisbat.MainProg</exec.mainClass>
     </properties>
     <build>
         <plugins>
@@ -28,7 +28,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>com.mycompany.mavenproject1.App</mainClass>
+                    <mainClass>com.mycompany.mavenproject1.MainProg</mainClass>
                 </configuration>
                 <executions>
                     <execution>

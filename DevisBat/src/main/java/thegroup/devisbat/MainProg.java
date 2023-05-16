@@ -15,20 +15,18 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class JavaFX_Menus extends Application {
+public class MainProg extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
     
-    Coin c1 = new Coin(0 ,0, 0, true);
-    
     public static char mode = 'p';//p : creer piece, m : modifier piece, g : gomme
-    
-    public static DessinCanvas dc;
+    public static int lastId = 0;
     
     public static BorderPane layout;
     
+    public static ArrayList<Piece> tempPieces = new ArrayList<Piece>();
    
 
     @Override
@@ -44,12 +42,17 @@ public class JavaFX_Menus extends Application {
         ModeSelector ms = new ModeSelector();
         layout.setTop(ms);
         
-        dc = new DessinCanvas();
         
         btnsNv.addNv(1);
         
         Scene scene = new Scene(layout, 960, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    
+    public static int GenererId()
+    {
+        lastId += 1;
+        return lastId;
     }
 }
