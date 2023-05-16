@@ -28,6 +28,7 @@ public class DessinCanvas extends Canvas{
         this.addEventHandler(MouseEvent.MOUSE_PRESSED, eventClick);
         this.addEventHandler(MouseEvent.MOUSE_RELEASED, eventUnclick);
         gc = getGraphicsContext2D();
+        gc.strokeRect(0, 0, this.getWidth(), this.getHeight());
     }
     
     public void DessinPoint(double x, double y)

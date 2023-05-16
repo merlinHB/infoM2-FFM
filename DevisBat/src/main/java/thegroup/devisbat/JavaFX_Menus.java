@@ -5,6 +5,7 @@ package  thegroup.devisbat;
 /**
  * JavaFX App
  */
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -25,13 +26,17 @@ public class JavaFX_Menus extends Application {
     public static char mode = 'p';//p : creer piece, m : modifier piece, g : gomme
     
     public static DessinCanvas dc;
+    
+    public static BorderPane layout;
+    
+   
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Batiment");
         
         
-        BorderPane layout = new BorderPane();
+        layout = new BorderPane();
         
         NvSelector btnsNv = new NvSelector();
         layout.setLeft(btnsNv);
@@ -41,9 +46,8 @@ public class JavaFX_Menus extends Application {
         
         dc = new DessinCanvas(512,512);
         GraphicsContext gc = dc.getGraphicsContext2D();
-        gc.strokeRect(0, 0, dc.getWidth(), dc.getHeight());
         layout.setCenter(dc);
-        
+        NvSelector.listeCanvas.add(dc);
         
         Scene scene = new Scene(layout, 960, 600);
         primaryStage.setScene(scene);

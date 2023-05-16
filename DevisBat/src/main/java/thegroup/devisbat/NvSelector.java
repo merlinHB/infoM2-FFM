@@ -1,10 +1,12 @@
 package thegroup.devisbat;
 
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -32,6 +34,10 @@ public class NvSelector extends VBox{
     }
     
     private Button nvNvBtn;
+    public static ArrayList<DessinCanvas> listeCanvas = new ArrayList<DessinCanvas>();
+  
+    
+    //listeCanvas.add(JavaFX_Menus.dc);
     
     public void addBtnNv(String txt)
     {
@@ -45,6 +51,8 @@ public class NvSelector extends VBox{
         public void handle(ActionEvent e)
         {
             addBtnNv("Niveau " + getChildren().size());
+            DessinCanvas niveau = new DessinCanvas(512, 512);
+            listeCanvas.add(niveau);
         }
     };
     
@@ -52,6 +60,8 @@ public class NvSelector extends VBox{
         public void handle(ActionEvent e)
         {
             System.out.println("Bouton nv " + (getChildren().size() - getChildren().indexOf(e.getSource()) - 1));
+            JavaFX_Menus.layout.setCenter(listeCanvas.get(1));
+           
         }
     };
 }
