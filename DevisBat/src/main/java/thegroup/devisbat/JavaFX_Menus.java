@@ -39,9 +39,9 @@ public class JavaFX_Menus extends Application {
         ModeSelector ms = new ModeSelector();
         layout.setTop(ms);
         
-        dc = new DessinCanvas(512,512);
-        GraphicsContext gc = dc.getGraphicsContext2D();
-        gc.strokeRect(0, 0, dc.getWidth(), dc.getHeight());
+        dc = new DessinCanvas();
+        //GraphicsContext gc = dc.getGraphicsContext2D();
+        //gc.strokeRect(0, 0, dc.getWidth(), dc.getHeight());
         layout.setCenter(dc);
         
         
