@@ -40,5 +40,6 @@ public class DevisBat {
             System.out.println("mur " + i + " : " + p1.getMur(i));
             System.out.println("coin " + i + " : " + p1.getCoin(i));
         }
+        System.out.println("surface : " + p1.surfacePiece());
     }
 }
