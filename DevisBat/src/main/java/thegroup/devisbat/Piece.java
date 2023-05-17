@@ -28,7 +28,8 @@ public class Piece {
         this.murs = new ArrayList<Mur>();
         for(int i =0; i<coins.length; i++)
         {
-            this.murs.add(new Mur(coins[i].getId(), coins[i], coins[(i+1)%coins.length]));
+            Mur m = new Mur(MainProg.GenererId(), coins[i], coins[(i+1)%coins.length]);
+            this.murs.add(m);
         }
     }
     

@@ -4,6 +4,7 @@
  */
 package thegroup.devisbat;
 
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
 
 /**
@@ -14,13 +15,20 @@ public class PieceGraphique extends Polygon{
     public PieceGraphique(double... coos)
     {
         super(coos);
-        Coin[] coins = new Coin[coos.length/2];
-        for(int i = 0; i<coos.length; i += 2)
-        {
-            coins[i] = new Coin(coos[i], coos[i+1]);
-        }
-        piece = new Piece(coins);
+        this.coos = coos;
     }
     
-    private Piece piece;
+    public Piece piece;
+    private double[] coos;
+    
+    public void CreerPiece()
+    {
+        Coin[] coins = new Coin[coos.length/2];
+        for(int i = 0; i<coins.length; i++)
+        {
+            Point2D pt = DessinCanvas.screenToRealPos(coos[i], coos[i+1]);
+            coins[i] = new Coin(pt.getX(), pt.getY());
+        }
+        this.piece = new Piece(coins);
+    }
 }

@@ -25,9 +25,9 @@ public class ModeSelector extends HBox{
         modPiece.setPrefSize(80, 40);
         modPiece.setOnAction(eventModPiece);
         
-        Button gomme = new Button("Gomme");
+        Button gomme = new Button("Selection Piece");
         gomme.setPrefSize(80, 40);
-        gomme.setOnAction(eventGomme);
+        gomme.setOnAction(eventselecPiece);
         
         super.getChildren().add(creerPiece);
         super.getChildren().add(modPiece);
@@ -48,10 +48,10 @@ public class ModeSelector extends HBox{
         }
     };
     
-    EventHandler<ActionEvent> eventGomme = new EventHandler<ActionEvent>() {
+    EventHandler<ActionEvent> eventselecPiece = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            MainProg.mode = 'g';
+            MainProg.mode = 's';
         }
     };
 }
