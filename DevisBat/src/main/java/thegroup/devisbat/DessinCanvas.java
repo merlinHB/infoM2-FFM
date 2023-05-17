@@ -12,7 +12,7 @@ import javafx.event.*;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.InputEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -25,11 +25,10 @@ public class DessinCanvas extends Pane{
     
     public static double rayonPoint = 5;
     public static double epaisseurTrait = 2;
-    public static double scrollSensi = 0.5;
     
     private static double pixelsParMetre = 100;
     private static Point2D origine = Point2D.ZERO;//coos de l'origine reelle en coos ecran 
-    private double[] initPos;
+    private Point2D initPos;
     
     private double maxX = 512;
     private double maxY = 512;
@@ -39,7 +38,6 @@ public class DessinCanvas extends Pane{
         super();
         this.addEventHandler(MouseEvent.MOUSE_PRESSED, eventClick);
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, eventGlissed);
-        this.addEventHandler(ScrollEvent.SCROLL, eventScrolled);
         this.setMaxSize(maxX, maxY);
         children = getChildren();
         
@@ -72,7 +70,7 @@ public class DessinCanvas extends Pane{
     public void DessinRectangle(double xa, double ya, double xz, double yz, boolean add)
     {
         double[] coos = {xa, ya,    xa, yz,     xz, yz,     xz, ya};
-        Polygon r = new Polygon(coos);
+        PieceGraphique r = new PieceGraphique(coos);
         r.setFill(Color.TRANSPARENT);
         r.setStroke(Color.BLACK);
         r.setStrokeWidth(epaisseurTrait);
@@ -136,13 +134,12 @@ public class DessinCanvas extends Pane{
     EventHandler<MouseEvent> eventClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent e)
         {
+            initPos = new Point2D(e.getX(), e.getY());
             switch(MainProg.mode) {
                 case 'p':
-                    initPos = new double[]{e.getX(), e.getY()};
-                    DessinRectangle(initPos[0], initPos[1], e.getX(), e.getY(), true);
+                    DessinRectangle(initPos.getX(), initPos.getY(), e.getX(), e.getY(), true);
                     break;
                 case 'm':
-                    initPos = new double[]{e.getX(), e.getY()};
                     break;
                 case 'g':
                     Gomme(e.getX(), e.getY());
@@ -156,19 +153,23 @@ public class DessinCanvas extends Pane{
     EventHandler<MouseEvent> eventGlissed = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent e)
         {
+            if(e.isMiddleButtonDown())
+            {
+                origine.add(e.getX() - initPos.getX(), e.getY() - initPos.getY());
+                for(Node n : children)
+                {
+                    n.setTranslateX(e.getX() - initPos.getX());
+                    n.setTranslateY(e.getY() - initPos.getY());
+                }
+                return;
+            }
             double x = Double.max(0, Double.min(e.getX(), maxX));
             double y = Double.max(0, Double.min(e.getY(), maxY));
             switch(MainProg.mode) {
                 case 'p':
-                    DessinRectangle(initPos[0], initPos[1], x, y, false);
+                    DessinRectangle(initPos.getX(), initPos.getY(), x, y, false);
                     break;
                 case 'm':
-//                    int i =0;
-//                    while(!children.get(i).contains(e.getX(), e.getY()))
-//                    {
-//                        i++;
-//                    }
-//                    DessinRectangle(initPos[0], initPos[1], e.getX(), e.getY(), i);
                     break;
                 case 'g':
                     Gomme(e.getX(), e.getY());
@@ -176,15 +177,6 @@ public class DessinCanvas extends Pane{
                 default:
                     break;
               }
-
-            
-        }
-    };
-    
-    EventHandler<ScrollEvent> eventScrolled = new EventHandler<ScrollEvent>() {
-        public void handle(ScrollEvent e)
-        {
-            pixelsParMetre += e.getDeltaY() * scrollSensi;
         }
     };
 }

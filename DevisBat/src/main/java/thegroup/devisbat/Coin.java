@@ -11,14 +11,10 @@ public class Coin {
         this.y = y;
     }
     
-    public Coin(int id, double x, double y, boolean save) {
-        this.id = id;
+    public Coin(double x, double y) {
+        this.id = MainProg.GenererId();
         this.x = x;
         this.y = y;
-        if(save)
-        {
-            Sauveteur.add(this);
-        }
     }
     
     private int id;

@@ -22,6 +22,16 @@ public class Piece {
             this.murs.add(new Mur(coins[i].getId(), coins[i], coins[(i+1)%coins.length]));
         }
     }
+    public Piece(Coin[] coins)
+    {
+        this.id = MainProg.GenererId();
+        this.murs = new ArrayList<Mur>();
+        for(int i =0; i<coins.length; i++)
+        {
+            this.murs.add(new Mur(coins[i].getId(), coins[i], coins[(i+1)%coins.length]));
+        }
+    }
+    
     private int id;
     private ArrayList<Mur> murs;
     
