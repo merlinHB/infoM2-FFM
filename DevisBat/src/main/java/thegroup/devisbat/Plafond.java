@@ -1,5 +1,8 @@
 package thegroup.devisbat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author mhibou01
@@ -8,25 +11,33 @@ public class Plafond{
     
     private int id;
     private Piece piece;
-    private Revetement revetement;
+    private ArrayList<PourPlafond> revetements;
 
-    public Plafond(int id, Piece piece, Revetement revetement) {
+    public Plafond(int id, Piece piece, PourPlafond... revetements) {
         this.piece = piece;
-        this.revetement = revetement;
+        this.revetements = new ArrayList(Arrays.asList(revetements));
+        if(this.revetements.isEmpty())
+        {
+            addRevetement("Defaut");
+        }
         this.id = id;
         this.piece.setPlafond(this);
     }
-    public Plafond(int id, Piece piece, Revetement revetement, boolean save) {
+    public Plafond(Piece piece, PourPlafond... revetements) {
         this.piece = piece;
-        this.revetement = revetement;
-        this.id = id;
-        this.piece.setPlafond(this);
-        if(save)
+        this.revetements = new ArrayList(Arrays.asList(revetements));
+        if(this.revetements.isEmpty())
         {
-            Sauveteur.add(this);
+            addRevetement("Defaut");
         }
+        this.id = MainProg.GenererId();
+        this.piece.setPlafond(this);
     }
     
+    public void addRevetement(String nom)
+    {
+        this.revetements.add(MagasinDeRevetements.getPourPlafond(nom));
+    }
     
     public void setPiece(Piece p1)
     {
@@ -35,7 +46,12 @@ public class Plafond{
     
     public double cout()
     {
-        return revetement.cout(surface());
+        double cout = 0;
+        for(PourPlafond ps : revetements)
+        {
+            cout += ps.cout(surface());
+        }
+        return cout;
     }
     
     public double surface() {
@@ -53,6 +69,11 @@ public class Plafond{
     
     @Override
     public String toString() {
-        return "P" + id +">>Piece" + piece.getId() + ";" + revetement.getNom();
+        String s = "P" + id +">>Piece" + piece.getId() + ";";
+        for(PourPlafond ps : revetements)
+        {
+            s += ps.getNom() + "&";
+        }
+        return s;
     }
 }

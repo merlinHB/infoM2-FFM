@@ -84,7 +84,12 @@ public class Sauveteur
                     Coin c1 = (Coin)Sauveteur.get(s.split(">>")[1].split(";")[0]);
                     Coin c2 = (Coin)Sauveteur.get(s.split(">>")[1].split(";")[1]);
                     Revetement r = MagasinDeRevetements.getRevetement(s.split(">>")[1].split(";")[2]);
-                    Sauveteur.add(new Mur(id, c1, c2, r));
+                    PourMur[] lpm = new PourMur[s.split(">>")[1].split(";")[1].split("&").length];
+                    for(int i = 0; i<lpm.length; i++)
+                    {
+                        lpm[i] = MagasinDeRevetements.getPourMur(s.split(">>")[1].split(";")[1].split("&")[i]);
+                    }
+                    Sauveteur.add(new Mur(id, c1, c2, lpm));
                 }
             }
             //piece
@@ -103,15 +108,23 @@ public class Sauveteur
                     int b = txtFichier.indexOf("/ ", a);
                     String strSol = txtFichier.substring(a, b);
                     int idSol = Integer.parseInt(strSol.split(">>")[0].replace("S", ""));
-                    Revetement r = MagasinDeRevetements.getRevetement(strSol.split(">>")[1].split(";")[1]);
-                    Sol sol = new Sol(idSol, p, r, true);
+                    PourSol[] lps = new PourSol[strSol.split(">>")[1].split(";")[1].split("&").length];
+                    for(int i = 0; i<lps.length; i++)
+                    {
+                        lps[i] = MagasinDeRevetements.getPourSol(strSol.split(">>")[1].split(";")[1].split("&")[i]);
+                    }
+                    Sol sol = new Sol(idSol, p, lps);
                     
                     a = txtFichier.indexOf(s.split(">>")[1].split(";")[5] + ">>");
                     b = txtFichier.indexOf("/ ", a);
                     String strPlaf = txtFichier.substring(a, b);
                     int idPlaf = Integer.parseInt(strPlaf.split(">>")[0].replace("P", ""));
-                    r = MagasinDeRevetements.getRevetement(strPlaf.split(">>")[1].split(";")[1]);
-                    Plafond plaf = new Plafond(idPlaf, p, r, true);
+                    PourPlafond[] lpp = new PourPlafond[strPlaf.split(">>")[1].split(";")[1].split("&").length];
+                    for(int i = 0; i<lpp.length; i++)
+                    {
+                        lpp[i] = MagasinDeRevetements.getPourPlafond(strSol.split(">>")[1].split(";")[1].split("&")[i]);
+                    }
+                    Plafond plaf = new Plafond(idPlaf, p, lpp);
                     
                     Sauveteur.add(p);
                 }

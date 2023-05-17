@@ -1,49 +1,65 @@
 package thegroup.devisbat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Mur {
-    public Mur(int id, Coin c1, Coin c2, Revetement revetement)
+    public Mur(int id, Coin c1, Coin c2, PourMur... revetements)
     {
         this.id = id;
         this.c1 = c1;
         this.c2 = c2;
-        this.revetement = revetement;
+        this.revetements = new ArrayList(Arrays.asList(revetements));
+        if(this.revetements.isEmpty())
+        {
+            addRevetement("Defaut");
+        }
         this.horizontal = c1.getY() == c2.getY();
     }
     
-    public Mur(int id, Coin c1, Coin c2, Revetement revetement, boolean save)
+    public Mur(Coin c1, Coin c2)
     {
-        this.id = id;
+        this.id = MainProg.GenererId();
         this.c1 = c1;
         this.c2 = c2;
-        this.revetement = revetement;
+        this.revetements = new ArrayList();
+        addRevetement("Defaut");
         this.horizontal = c1.getY() == c2.getY();
-        if(save){
-            Sauveteur.add(this);
-        }
     }
     
     private int id;
     private Coin c1;
     private Coin c2;
-    private Revetement revetement;
+    private ArrayList<PourMur> revetements;
     private boolean horizontal;
     
     
     public double cout()
     {
-        return revetement.cout(Coin.DistanceEntre(c1, c2) * 3);
+        double cout = 0;
+        for(PourMur pm : revetements)
+        {
+            cout += pm.cout(Coin.DistanceEntre(c1, c2) * 3);
+        }
+        return cout;
     }
     public double longueur()
     {
         return Coin.DistanceEntre(c1, c2);
     }
-
-    public Revetement getRevetement() {
-        return revetement;
+    
+    
+    public void addRevetement(String nom)
+    {
+        this.revetements.add(MagasinDeRevetements.getPourMur(nom));
     }
 
-    public void setRevetement(Revetement revetement) {
-        this.revetement = revetement;
+    public PourMur[] getRevetement() {
+        return (PourMur[])revetements.toArray();
+    }
+
+    public void setRevetement(int id, PourMur pm) {
+        this.revetements.add(id, pm);
     }
 
     public Coin getC1() {
@@ -95,6 +111,11 @@ public class Mur {
 
     @Override 
     public String toString() {
-        return "M" + id + ">>C" + c1.getId() + ";C" + c2.getId() + ";" + revetement.getNom();
+        String s = "M" + id + ">>C" + c1.getId() + ";C" + c2.getId() + ";";
+        for(PourMur pm : revetements)
+        {
+            s += pm.getNom() + "&";
+        }
+        return s;
     }
 }

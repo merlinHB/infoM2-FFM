@@ -11,10 +11,10 @@ import java.util.HashMap;
  * @author FeliPlum
  */
 public class MagasinDeRevetements {
-    private static HashMap<Integer, Revetement> revetements = new HashMap<>();
-    private static HashMap<String, Isolant> isolants = new HashMap<>();
-    private static HashMap<String, Carrelage> carrelages = new HashMap<>();
-    private static HashMap<String, Peinture> peintures = new HashMap<>();
+    private static HashMap<Integer, String> ids = new HashMap<>();
+    private static HashMap<String, PourPlafond> pourPlafonds = new HashMap<>();
+    private static HashMap<String, PourMur> pourMurs = new HashMap<>();
+    private static HashMap<String, PourSol> pourSols = new HashMap<>();
     
     public static void LireRevetements()
     {
@@ -25,42 +25,34 @@ public class MagasinDeRevetements {
         //éviter les accents
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader("Revetements.revetus"));         
-            ArrayList<String> listeDeStringLues = new ArrayList<String>();
+            BufferedReader br = new BufferedReader(new FileReader("Revetements.revetus"));
+            br.readLine();
             String temp = br.readLine();
             int i = 0;
             while(temp != null)
             {
-                System.out.println(temp + " ajouté, id : " + i);
-                listeDeStringLues.add(temp);
-                temp = br.readLine();
-                i++;
-            }
-            
-            i = 0;
-            for(String s : listeDeStringLues)
-            {
-                String[] elementsDuRev = s.split(": ");
-                String type = elementsDuRev[0];
+                String[] elementsDuRev = temp.split(";");
+                int id = Integer.parseInt(elementsDuRev[0]);
                 String nom = elementsDuRev[1];
-                double prix = Double.parseDouble(elementsDuRev[2]);
-                
-                if(type.contains("Isolant"))
+                boolean pourMur = (elementsDuRev[2].contains("1"));
+                boolean pourSol = (elementsDuRev[3].contains("1"));
+                boolean pourPlafond = (elementsDuRev[4].contains("1"));
+                double prix = Double.parseDouble(elementsDuRev[5]);
+                if(pourMur)
                 {
-                    isolants.put(nom, new Isolant(i, nom, prix));
-                    revetements.put(i, new Isolant(i, nom, prix));
-                }else if(type.contains("Carrelage"))
-                {
-                    carrelages.put(nom, new Carrelage(i, nom, prix));
-                    revetements.put(i, new Carrelage(i, nom, prix));
-                }else if(type.contains("Peinture"))
-                {
-                    peintures.put(nom, new Peinture(i, nom, prix));
-                    revetements.put(i, new Peinture(i, nom, prix));
-                }else
-                {
-                    System.out.println("Element non reconnu : " + type);
+                    pourMurs.put(nom, new PourMur(id, nom, prix));
                 }
+                if(pourSol)
+                {
+                    pourSols.put(nom, new PourSol(id, nom, prix));
+                }
+                if(pourPlafond)
+                {
+                    pourPlafonds.put(nom, new PourPlafond(id, nom, prix));
+                }
+                ids.put(id, nom);
+                
+                temp = br.readLine();
                 i++;
             }
             br.close();
@@ -73,49 +65,60 @@ public class MagasinDeRevetements {
     
     public static Revetement getRevetement(int id)
     {
-        return MagasinDeRevetements.revetements.get(id);
+        String nom = ids.get(id);
+        if(pourMurs.containsKey(nom))
+        {
+            return pourMurs.get(nom);
+        }else if(pourSols.containsKey(nom))
+        {
+            return pourSols.get(nom);
+        }else if(pourPlafonds.containsKey(nom))
+        {
+            return pourPlafonds.get(nom);
+        }else{
+            return null;
+        }
     }
     
     public static Revetement getRevetement(String nom)
     {
-        if(isolants.containsKey(nom))
+        if(pourPlafonds.containsKey(nom))
         {
-            return isolants.get(nom);
-        }else if(carrelages.containsKey(nom))
+            return pourPlafonds.get(nom);
+        }else if(pourMurs.containsKey(nom))
         {
-            return carrelages.get(nom);
-        }else if(peintures.containsKey(nom))
+            return pourMurs.get(nom);
+        }else if(pourSols.containsKey(nom))
         {
-            return peintures.get(nom);
+            return pourSols.get(nom);
         }else 
         {
-            System.out.println("Revetement '"+nom+"' non trouvé");
-            return revetements.get(0);
+            return null;
         }
     }
     
     public static Revetement[] getListeDeRevetement()
     {
-        Revetement[] liste = new Revetement[MagasinDeRevetements.revetements.size()];
-        for(int i = 0; i<liste.length; i++)
-        {
-            liste[i] = MagasinDeRevetements.revetements.get(i);
-        }
-        return liste;
+        Revetement[] liste = new Revetement[ids.size()];
+        ArrayList<Revetement> revs = new ArrayList();
+        revs.addAll(pourMurs.values());
+        revs.addAll(pourSols.values());
+        revs.addAll(pourPlafonds.values());
+        return (Revetement[])revs.toArray();
     }
     
-    public static Carrelage getCarrelage(String nom)
+    public static PourMur getPourMur(String nom)
     {
-        return MagasinDeRevetements.carrelages.getOrDefault(nom, MagasinDeRevetements.carrelages.get("Defaut"));
+        return pourMurs.getOrDefault(nom, pourMurs.get("Defaut"));
     }
     
-    public static Isolant getIsolant(String nom)
+    public static PourPlafond getPourPlafond(String nom)
     {
-        return MagasinDeRevetements.isolants.get(nom);
+        return pourPlafonds.getOrDefault(nom, pourPlafonds.get("Defaut"));
     }
     
-    public static Peinture getPeinture(String nom)
+    public static PourSol getPourSol(String nom)
     {
-        return MagasinDeRevetements.peintures.get(nom);
+        return pourSols.getOrDefault(nom, pourSols.get("Defaut"));
     }
 }

@@ -3,9 +3,9 @@ package thegroup.devisbat;
  *
  * @author fscheer01
  */
-public class Peinture extends Revetement{
+public class PourPlafond extends Revetement {
     
-    public Peinture(int idrevetement, String nom, double prix) {
+    public PourPlafond(int idrevetement, String nom, double prix) {
        super(idrevetement, nom, prix);
     }
 
@@ -13,4 +13,5 @@ public class Peinture extends Revetement{
     public String toString() {
         return super.toString();
     }
-}
+}    
+

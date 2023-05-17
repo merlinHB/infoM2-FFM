@@ -1,11 +1,12 @@
 package thegroup.devisbat;
+
 /**
  *
- * @author fscheer01
+ * @author mhibou01
  */
-public class Isolant extends Revetement {
+public class PourMur extends Revetement{
     
-    public Isolant(int idrevetement, String nom, double prix) {
+    public PourMur(int idrevetement, String nom, double prix) {
        super(idrevetement, nom, prix);
     }
 
@@ -13,5 +14,4 @@ public class Isolant extends Revetement {
     public String toString() {
         return super.toString();
     }
-}    
-
+}

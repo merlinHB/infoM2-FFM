@@ -19,7 +19,7 @@ public class Piece {
         this.murs = new ArrayList<Mur>();
         for(int i =0; i<coins.length; i++)
         {
-            this.murs.add(new Mur(coins[i].getId(), coins[i], coins[(i+1)%coins.length], MagasinDeRevetements.getRevetement(0)));
+            this.murs.add(new Mur(coins[i].getId(), coins[i], coins[(i+1)%coins.length]));
         }
     }
     private int id;
