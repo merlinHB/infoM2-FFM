@@ -6,6 +6,7 @@ package thegroup.devisbat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import javafx.collections.ObservableList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.event.*;
@@ -26,13 +27,14 @@ public class DessinCanvas extends Pane{
     public static double rayonPoint = 5;
     public static double epaisseurTrait = 2;
     
-    private static double pixelsParMetre = 100;
-    private static Point2D origine;//coos de l'origine reelle en coos ecran 
+    private static double pixelsParMetre = 25;
+    private Point2D origine;//coos de l'origine reelle en coos ecran 
     private Point2D initPos;
     
     private double maxX = 512;
     private double maxY = 512;
     private ObservableList<Node> children;
+    private HashMap<Node, Piece> pieces;
     
     public DessinCanvas(){
         super();
@@ -41,17 +43,16 @@ public class DessinCanvas extends Pane{
         this.addEventHandler(MouseEvent.MOUSE_RELEASED, eventUnclicked);
         this.setMaxSize(maxX, maxY);
         children = getChildren();
+        pieces = new HashMap<Node, Piece>();
         
         origine = new Point2D(256,256);
         
         Point2D extr1 = realToScreenPos(0,0);
-        Point2D extr2 = realToScreenPos(100,0);
+        Point2D extr2 = realToScreenPos(1,0);
         Polygon r = new Polygon(extr1.getX(), extr1.getY(), extr2.getX(), extr2.getY());
-        r.setFill(Color.BLACK);
-        r.setStroke(Color.BLACK);
+        r.setStroke(Color.GRAY);
         r.setStrokeWidth(epaisseurTrait);
         children.add(r);
-        //DessinRectangle(origine.x, origine.y, realToScreenPos(0.6, 1.2).x, realToScreenPos(0.6, 1.2).y, true);
         
         
         setStyle("-fx-background-color: #fff9ea");
@@ -78,7 +79,7 @@ public class DessinCanvas extends Pane{
     public void DessinRectangle(double xa, double ya, double xz, double yz, boolean add)
     {
         double[] coos = {xa, ya,    xa, yz,     xz, yz,     xz, ya};
-        PieceGraphique r = new PieceGraphique(coos);
+        Polygon r = new Polygon(coos);
         r.setFill(Color.TRANSPARENT);
         r.setStroke(Color.BLACK);
         r.setStrokeWidth(epaisseurTrait);
@@ -91,26 +92,25 @@ public class DessinCanvas extends Pane{
     }
     
     
-    public static Point2D realToScreenPos(double x, double y)
+    public Point2D realToScreenPos(double x, double y)
     {
-        Point2D coos = new Point2D(x, y);
-        coos.multiply(pixelsParMetre);
-        coos = new Point2D(coos.getX()+ origine.getX(), -coos.getY() + origine.getY());
-        return coos;
+        return new Point2D(x*pixelsParMetre + origine.getX(), -y*pixelsParMetre - origine.getY());
     }
     
-    public static Point2D screenToRealPos(double x, double y)
+    public Point2D screenToRealPos(double x, double y)
     {
-        Point2D coos = new Point2D(x, y);
-        coos = new Point2D(coos.getX() - origine.getX(), -coos.getY() - origine.getY());
-        coos.multiply(1/pixelsParMetre);
-        return coos;
+        return new Point2D((x - origine.getX())/pixelsParMetre, (-y - origine.getY())/pixelsParMetre);
     }
     
     EventHandler<MouseEvent> eventClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent e)
         {
             initPos = new Point2D(e.getX(), e.getY());
+            if(e.isMiddleButtonDown())
+            {
+                initPos = origine;
+                return;
+            }
             switch(MainProg.mode) {
                 case 'p':
                     DessinRectangle(initPos.getX(), initPos.getY(), e.getX(), e.getY(), true);
@@ -120,17 +120,16 @@ public class DessinCanvas extends Pane{
                 case 's':
                     for(Node n : children)
                     {
-                        if(n.getClass() == PieceGraphique.class)
+                        if(n.getClass() == Polygon.class)
                         {
                             if(n.contains(e.getX(), e.getY()))
                             {
-                                ((PieceGraphique)n).setStroke(Color.RED);
-                                MainProg.layout.setRight(new Inspecteur(((PieceGraphique)n).piece));
+                                ((Polygon)n).setStroke(Color.RED);
+                                MainProg.layout.setRight(new Inspecteur(pieces.get(n)));
                             }else{
-                                ((PieceGraphique)n).setStroke(Color.BLACK);
+                                ((Polygon)n).setStroke(Color.BLACK);
                             }
                         }
-                        
                     }
                     break;
                 default:
@@ -144,11 +143,11 @@ public class DessinCanvas extends Pane{
         {
             if(e.isMiddleButtonDown())
             {
-                origine.add(e.getX() - initPos.getX(), e.getY() - initPos.getY());
+                origine = new Point2D(e.getX() - initPos.getX(), e.getY() - initPos.getY());
                 for(Node n : children)
                 {
-                    n.setTranslateX(e.getX() - initPos.getX());
-                    n.setTranslateY(e.getY() - initPos.getY());
+                    n.setTranslateX(origine.getX());
+                    n.setTranslateY(origine.getY());
                 }
                 return;
             }
@@ -178,7 +177,17 @@ public class DessinCanvas extends Pane{
             }
             switch(MainProg.mode) {
                 case 'p':
-                    ((PieceGraphique)children.get(children.size() - 1)).CreerPiece();
+                    double x = Double.max(0, Double.min(e.getX(), maxX));
+                    double y = Double.max(0, Double.min(e.getY(), maxY));
+                    //{xa, ya,    xa, yz,     xz, yz,     xz, ya}
+                    double[] coos = new double[]{x,y,x,e.getY(),e.getX(),e.getY(),e.getX(),y};
+                    Coin[] coins = new Coin[4];
+                    for(int i = 0; i<coins.length; i++)
+                    {
+                        Point2D pt = screenToRealPos(coos[i], coos[i+1]);
+                        coins[i] = new Coin(pt.getX(), pt.getY());
+                    }
+                    pieces.put(children.get(children.size() - 1), new Piece(coins));
                     break;
                 default:
                     break;

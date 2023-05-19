@@ -21,7 +21,7 @@ public class MainProg extends Application {
         launch(args);
     }
     
-    public static char mode = 'p';//p : creer piece, m : modifier piece, g : gomme
+    public static char mode = 'p';//p : creer piece, m : modifier piece, s : selec
     public static int lastId = 0;
     
     public static BorderPane layout;

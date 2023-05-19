@@ -21,16 +21,16 @@ public class ModeSelector extends HBox{
         creerPiece.setPrefSize(80, 40);
         creerPiece.setOnAction(eventCreerPiece);
         
-        Button modPiece = new Button("Modifier\npiece");
-        modPiece.setPrefSize(80, 40);
-        modPiece.setOnAction(eventModPiece);
+//        Button modPiece = new Button("Modifier\npiece");
+//        modPiece.setPrefSize(80, 40);
+//        modPiece.setOnAction(eventModPiece);
         
-        Button gomme = new Button("Selection Piece");
+        Button gomme = new Button("Selection\nPiece");
         gomme.setPrefSize(80, 40);
         gomme.setOnAction(eventselecPiece);
         
         super.getChildren().add(creerPiece);
-        super.getChildren().add(modPiece);
+        //super.getChildren().add(modPiece);
         super.getChildren().add(gomme);
     }
     
