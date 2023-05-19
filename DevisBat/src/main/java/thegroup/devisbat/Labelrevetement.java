@@ -16,23 +16,22 @@ import static thegroup.devisbat.MainProg.Batimentfinal;
  * @author mhibou01
  */
 public class Labelrevetement extends HBox{
+    
+    Label totalrevetement = new Label("Cout total" + Batimentfinal.devisBatiment());
   
     public Labelrevetement(){
-        Label totalrevetement = new Label("Cout total" + Batimentfinal.devisBatiment());
-        Button updateRevetement = new Button("update Revetement");
         
-        updateRevetement.setOnAction(update);
+        Button UpdateRevetement = new Button("update Revetement");
         
-        EventHandler<ActionEvent> update = new EventHandler<ActionEvent>() {
+        UpdateRevetement.setOnAction(update);
+        
+        
+}
+   EventHandler<ActionEvent> update = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            ;
+            totalrevetement.setText("Cout total" + Batimentfinal.devisBatiment());
         }
     };
-        
-        
-    
-}
-   
     
 }
