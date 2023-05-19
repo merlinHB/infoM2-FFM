@@ -31,6 +31,8 @@ public class Piece {
             Mur m = new Mur(MainProg.GenererId(), coins[i], coins[(i+1)%coins.length]);
             this.murs.add(m);
         }
+        this.sol = new Sol(MainProg.GenererId(), this, MagasinDeRevetements.getPourSol("Defaut"));
+        this.plafond = new Plafond(MainProg.GenererId(), this, MagasinDeRevetements.getPourPlafond("Defaut"));
     }
     
     private int id;
@@ -84,18 +86,6 @@ public class Piece {
     
     public void setCoin(int numero, double x, double y)
     {
-//        ArrayList<Coin> coinsH;//coins reliés horizontalement au coin qu'on replace
-//        ArrayList<Coin> coinsV;//idem mais verticalement
-//        int i = 0;
-//        while(murs.get(i).estHorizontal() == murs.get((i + 1)%murs.size()).estHorizontal())
-//        {
-//            if(murs.get(i).estHorizontal())
-//            {
-//                murs.get(i).setC1(murs.get(i).getId(), );
-//            }
-//            l2 += murs.get((i + 1)%murs.size()).longueur();
-//            i++;
-//        }
         int coin = numero%murs.size();
         int coinPrecedent = (numero + murs.size() - 1)%murs.size();
         murs.get(coin).setC1(x, y);
