@@ -4,9 +4,12 @@
  */
 package thegroup.devisbat;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -33,7 +36,37 @@ public class Inspecteur extends VBox{
             getChildren().add(txt);
             getChildren().add(x);
             getChildren().add(y);
-        }
+       
+            x.addEventHandler(KeyEvent.KEY_PRESSED, eventkeyEnter);
+            
+            
+
+        
+        };
+        
+        
+        
+     
     }
-    private Piece piece;
-}
+            EventHandler <KeyEvent> eventkeyEnter = new EventHandler <KeyEvent>() {
+            public void handle(KeyEvent event){
+            if ((event.getCode()) != (KeyCode.ENTER)) {
+                return;
+                }
+                TextField x = (TextField)event.getTarget();
+                x.setText(x.getText());
+            }
+                
+            };
+            
+            
+            private Piece piece;
+   
+           
+        }
+    
+
+
+   
+ 
+

@@ -15,6 +15,8 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+
+
 public class MainProg extends Application {
 
     public static void main(String[] args) {
@@ -25,6 +27,8 @@ public class MainProg extends Application {
     public static int lastId = 0;
     
     public static BorderPane layout;
+    
+    public static Batiment Batimentfinal; 
     
     public static ArrayList<Piece> tempPieces = new ArrayList<Piece>();
    
