@@ -60,7 +60,12 @@ public class Mur {
     
     public PourMur[] getRevetements()
     {
-        return (PourMur[])revetements.toArray();
+        PourMur[] ms = new PourMur[revetements.size()];
+        for(int i =0; i<revetements.size(); i++)
+        {
+            ms[i] = revetements.get(i);
+        }
+        return ms;
     }
 
     public Coin getC1() {

@@ -112,6 +112,18 @@ public class MagasinDeRevetements {
         return pourMurs.getOrDefault(nom, pourMurs.get("Defaut"));
     }
     
+    public static PourMur[] getPourMurs()
+    {
+        PourMur[] pms = new PourMur[pourMurs.size()];
+        int i = 0;
+        for(PourMur pm : pourMurs.values())
+        {
+            pms[i] = pm;
+            i++;
+        }
+        return pms;
+    }
+    
     public static PourPlafond getPourPlafond(String nom)
     {
         return pourPlafonds.getOrDefault(nom, pourPlafonds.get("Defaut"));

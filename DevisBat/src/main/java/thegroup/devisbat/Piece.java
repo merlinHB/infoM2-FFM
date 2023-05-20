@@ -108,7 +108,12 @@ public class Piece {
     }
     public Mur[] getMurs()
     {
-        return (Mur[])murs.toArray();
+        Mur[] ms = new Mur[murs.size()];
+        for(int i =0; i<murs.size(); i++)
+        {
+            ms[i] = murs.get(i);
+        }
+        return ms;
     }
     
     public Mur getMur(int numero)

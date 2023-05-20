@@ -146,6 +146,20 @@ public class DessinCanvas extends Pane{
                     DessinRectangle(initPos.getX(), initPos.getY(), e.getX(), e.getY(), true);
                     break;
                 case 'r':
+                    for(Node n : children)
+                    {
+                        if(n.getClass() == Polygon.class)
+                        {
+                            if(n.isPressed())
+                            {
+                                ((Polygon)n).setStroke(Color.BLUE);
+                                MainProg.layout.setRight(new Inspecteur(pieces.get(n)));
+                                return;
+                            }else{
+                                ((Polygon)n).setStroke(Color.BLACK);
+                            }
+                        }
+                    }
                     break;
                 case 's':
                     for(Node n : children)

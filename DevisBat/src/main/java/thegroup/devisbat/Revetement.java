@@ -33,4 +33,9 @@ public abstract class Revetement {
     {
         return nom;
     }
+    
+    public double getPrix()
+    {
+        return prix;
+    }
 }
