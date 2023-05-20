@@ -51,6 +51,11 @@ public class MainProg extends Application {
         
         btnsNv.addNv(1);
         
+        Batimentfinal = new Batiment();
+        
+        Labelrevetement Labelle = new Labelrevetement();
+        layout.setBottom(Labelle);
+        
         Scene scene = new Scene(layout, 960, 600);
         primaryStage.setScene(scene);
         primaryStage.show();

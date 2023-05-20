@@ -4,6 +4,8 @@
  */
 package thegroup.devisbat;
 
+import static java.lang.Math.round;
+import static java.lang.StrictMath.round;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -17,20 +19,24 @@ import static thegroup.devisbat.MainProg.Batimentfinal;
  */
 public class Labelrevetement extends HBox{
     
-    Label totalrevetement = new Label("Cout total" + Batimentfinal.devisBatiment());
+    Label totalrevetement = new Label("Cout total " + Math.round(MainProg.Batimentfinal.devisBatiment()) + " €");
+    
   
     public Labelrevetement(){
         
-        Button UpdateRevetement = new Button("update Revetement");
-        
+        Button UpdateRevetement = new Button("Update Revetement");
+        UpdateRevetement.setPrefSize(150, 50);
+        setSpacing(10);
         UpdateRevetement.setOnAction(update);
+        super.getChildren().add(UpdateRevetement);
+        super.getChildren().add(totalrevetement);
         
         
 }
    EventHandler<ActionEvent> update = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            totalrevetement.setText("Cout total" + Batimentfinal.devisBatiment());
+            totalrevetement.setText("Cout total " + Math.round(MainProg.Batimentfinal.devisBatiment()) + " €");
         }
     };
     
