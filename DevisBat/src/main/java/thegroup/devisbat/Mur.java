@@ -54,12 +54,13 @@ public class Mur {
         this.revetements.add(MagasinDeRevetements.getPourMur(nom));
     }
 
-    public PourMur[] getRevetement() {
-        return (PourMur[])revetements.toArray();
-    }
-
     public void setRevetement(int id, PourMur pm) {
         this.revetements.add(id, pm);
+    }
+    
+    public PourMur[] getRevetements()
+    {
+        return (PourMur[])revetements.toArray();
     }
 
     public Coin getC1() {

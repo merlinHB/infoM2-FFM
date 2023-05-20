@@ -106,6 +106,10 @@ public class Piece {
         }
         return coins;
     }
+    public Mur[] getMurs()
+    {
+        return (Mur[])murs.toArray();
+    }
     
     public Mur getMur(int numero)
     {

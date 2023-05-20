@@ -21,30 +21,29 @@ public class ModeSelector extends HBox{
         creerPiece.setPrefSize(80, 40);
         creerPiece.setOnAction(eventCreerPiece);
         
-//        Button modPiece = new Button("Modifier\npiece");
-//        modPiece.setPrefSize(80, 40);
-//        modPiece.setOnAction(eventModPiece);
+        Button appRevs = new Button("Appliquer\ndes revetements");
+        appRevs.setPrefSize(80, 40);
+        appRevs.setOnAction(eventRevPiece);
         
-        Button gomme = new Button("Selection\nPiece");
-        gomme.setPrefSize(80, 40);
-        gomme.setOnAction(eventselecPiece);
+        Button ajustCoin = new Button("Ajuster\nles coins");
+        ajustCoin.setPrefSize(80, 40);
+        ajustCoin.setOnAction(eventselecPiece);
         
         super.getChildren().add(creerPiece);
-        //super.getChildren().add(modPiece);
-        super.getChildren().add(gomme);
+        super.getChildren().add(ajustCoin);
+        super.getChildren().add(appRevs);
     }
     
+    EventHandler<ActionEvent> eventRevPiece = new EventHandler<ActionEvent>() {
+        public void handle(ActionEvent e)
+        {
+            MainProg.mode = 'r';
+        }
+    };
     EventHandler<ActionEvent> eventCreerPiece = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
             MainProg.mode = 'p';
-        }
-    };
-    
-    EventHandler<ActionEvent> eventModPiece = new EventHandler<ActionEvent>() {
-        public void handle(ActionEvent e)
-        {
-            MainProg.mode = 'm';
         }
     };
     

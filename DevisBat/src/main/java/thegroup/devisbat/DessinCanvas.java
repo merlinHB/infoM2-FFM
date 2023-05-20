@@ -145,7 +145,7 @@ public class DessinCanvas extends Pane{
                 case 'p':
                     DessinRectangle(initPos.getX(), initPos.getY(), e.getX(), e.getY(), true);
                     break;
-                case 'm':
+                case 'r':
                     break;
                 case 's':
                     for(Node n : children)
@@ -156,11 +156,13 @@ public class DessinCanvas extends Pane{
                             {
                                 ((Polygon)n).setStroke(Color.RED);
                                 MainProg.layout.setRight(new Inspecteur(pieces.get(n), thisDC));
+                                return;
                             }else{
                                 ((Polygon)n).setStroke(Color.BLACK);
                             }
                         }
                     }
+                    MainProg.layout.setRight(null);
                     break;
                 default:
                     break;

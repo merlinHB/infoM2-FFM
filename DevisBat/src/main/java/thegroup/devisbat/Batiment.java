@@ -11,12 +11,9 @@ public class Batiment {
         this.niveaux = new ArrayList<Niveau>(Arrays.asList(niveaux));
     }
     
-    public Batiment(int id, Niveau[] niveaux, boolean save) {
-        this.id = id;
+    public Batiment(Niveau... niveaux) {
+        this.id = MainProg.GenererId();
         this.niveaux = new ArrayList<Niveau>(Arrays.asList(niveaux));
-        if(save){
-            Sauveteur.add(this);
-        }
     }
     
     private int id;

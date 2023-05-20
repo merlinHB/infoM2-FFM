@@ -23,7 +23,7 @@ public class MainProg extends Application {
         launch(args);
     }
     
-    public static char mode = 'p';//p : creer piece, m : modifier piece, s : selec
+    public static char mode = 'p';//p : creer piece, r : revetir la piece, s : selec pour coins
     public static int lastId = 0;
     
     public static BorderPane layout;
@@ -36,6 +36,8 @@ public class MainProg extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Batiment");
+        
+        MagasinDeRevetements.LireRevetements();
         
         
         layout = new BorderPane();
