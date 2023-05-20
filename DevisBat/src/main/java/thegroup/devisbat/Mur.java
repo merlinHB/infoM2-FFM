@@ -58,6 +58,11 @@ public class Mur {
         this.revetements.add(id, pm);
     }
     
+    public PourMur getRevetement(int id)
+    {
+        return revetements.get(id);
+    }
+    
     public PourMur[] getRevetements()
     {
         PourMur[] ms = new PourMur[revetements.size()];

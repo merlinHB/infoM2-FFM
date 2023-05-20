@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import javafx.collections.ObservableList;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.event.*;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.InputEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -30,7 +29,6 @@ public class DessinCanvas extends Pane{
     private static double pixelsParMetre = 25;
     private Point2D origine;//coos de l'origine reelle en coos ecran 
     private Point2D initPos;
-    private Point2D origineInitPos;
     private Point2D prevPos;
     
     private double maxX = 512;
@@ -138,7 +136,6 @@ public class DessinCanvas extends Pane{
             if(e.isMiddleButtonDown())
             {
                 prevPos = new Point2D(e.getX(), e.getY());
-                origineInitPos = origine;
                 return;
             }
             switch(MainProg.mode) {
@@ -153,7 +150,7 @@ public class DessinCanvas extends Pane{
                             if(n.isPressed())
                             {
                                 ((Polygon)n).setStroke(Color.BLUE);
-                                MainProg.layout.setRight(new Inspecteur(pieces.get(n)));
+                                MainProg.layout.setRight(new ScrollPane(new Inspecteur(pieces.get(n))));
                                 return;
                             }else{
                                 ((Polygon)n).setStroke(Color.BLACK);
@@ -169,7 +166,7 @@ public class DessinCanvas extends Pane{
                             if(n.isPressed())
                             {
                                 ((Polygon)n).setStroke(Color.RED);
-                                MainProg.layout.setRight(new Inspecteur(pieces.get(n), thisDC));
+                                MainProg.layout.setRight(new ScrollPane(new Inspecteur(pieces.get(n), thisDC)));
                                 return;
                             }else{
                                 ((Polygon)n).setStroke(Color.BLACK);

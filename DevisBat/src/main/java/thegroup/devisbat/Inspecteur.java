@@ -5,6 +5,7 @@
 package thegroup.devisbat;
 
 import com.sun.javafx.scene.control.skin.LabeledText;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -52,40 +53,33 @@ public class Inspecteur extends VBox{
     {
         this.piece = piece;
         
-        setPadding(new Insets(2, 2, 4, 4));
+        
+        setPadding(new Insets(4, 4, 4, 4));
         setSpacing(10);
+        
         
         for(Mur m: piece.getMurs())
         {
             Label txt = new Label("Mur " + m.getId());
             txt.setPrefSize(60, 20);
             txt.setFont(new Font(15));
-            getChildren().add(txt);
             
-            ComboBox revDD = new ComboBox();
+            VBox revsContainer = new VBox();
             for(PourMur pm : m.getRevetements())
             {
-                getChildren().add(new Label(pm.getNom()+" : "+pm.getPrix()+" €"));
+                revsContainer.getChildren().add(new Label(pm.getNom()+" : "+pm.getPrix()+" €/m²"));
             }
+            
+            ComboBox revDD = new ComboBox();
             for(PourMur pm : MagasinDeRevetements.getPourMurs())
             {
-                Label lbl = new Label(pm.getNom()+" : "+pm.getPrix()+" €");
-                lbl.addEventHandler(MouseEvent.MOUSE_PRESSED, eventEnterRev);
-                revDD.getItems().add(pm.getNom()+" : "+pm.getPrix()+" €");
+                revDD.getItems().add(pm.getNom()+" : "+pm.getPrix()+" €/m²");
             }
             revDD.setPromptText("Ajoutez un revetement");
-            revDD.addEventHandler(MouseEvent.MOUSE_PRESSED, eventEnterRev);
+            revDD.addEventHandler(ActionEvent.ACTION, eventMur);
+            getChildren().add(txt);
+            getChildren().add(revsContainer);
             getChildren().add(revDD);
-//            TextField x = new TextField(c.getX() + "");
-//            x.setPrefSize(40, 20);
-//            TextField y = new TextField(c.getY() + "");
-//            x.setPrefSize(40, 20);
-//            getChildren().add(txt);
-//            getChildren().add(x);
-//            getChildren().add(y);
-//       
-//            x.addEventHandler(KeyEvent.KEY_PRESSED, eventkeyEnter);
-//            y.addEventHandler(KeyEvent.KEY_PRESSED, eventkeyEnter);
         }
     }
     EventHandler <KeyEvent> eventkeyEnter = new EventHandler <KeyEvent>() {
@@ -103,13 +97,15 @@ public class Inspecteur extends VBox{
             dc.UpdatePoly(cepie, piece);
         }         
     };
-    EventHandler <MouseEvent> eventEnterRev = new EventHandler <MouseEvent>() {
-        public void handle(MouseEvent e){
+    EventHandler <ActionEvent> eventMur = new EventHandler <ActionEvent>() {
+        public void handle(ActionEvent e){
             ComboBox c = (ComboBox)e.getTarget();
-            //c.valueProperty()
-            System.out.println(MagasinDeRevetements.getPourMur(l.getText().split(" : ")[0]));
-//            PourMur r = MagasinDeRevetements.getPourMur(cb.getPromptText());
-//            cb.getItems().add(r.getNom()+" : "+r.getPrix()+" €");
+            int id = getChildren().indexOf(c)/2;
+            String value = c.getValue().toString();
+            piece.getMur(id).addRevetement(value.split(" : ")[0]);
+            PourMur pm = MagasinDeRevetements.getPourMur(value.split(" : ")[0]);
+            ((VBox)getChildren().get(id)).getChildren().add(new Label(pm.getNom()+" : "+pm.getPrix()+" €/m²"));
+            System.out.println(piece.getMur(id));
         }         
     };
             
