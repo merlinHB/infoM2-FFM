@@ -2,6 +2,7 @@ package thegroup.devisbat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import javafx.geometry.Point2D;
 
 public class Mur {
     public Mur(int id, Coin c1, Coin c2, PourMur... revetements)
@@ -46,6 +47,11 @@ public class Mur {
     public double longueur()
     {
         return Coin.DistanceEntre(c1, c2);
+    }
+    
+    public Point2D milieu()
+    {
+        return new Point2D((c1.getX() + c2.getX())/2, (c1.getY() + c2.getY())/2);
     }
     
     

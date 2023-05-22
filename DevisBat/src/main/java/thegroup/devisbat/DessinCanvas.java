@@ -36,9 +36,11 @@ public class DessinCanvas extends Pane{
     private ObservableList<Node> children;
     private HashMap<Node, Piece> pieces;
     private DessinCanvas thisDC;
+    private int niveau;
     
-    public DessinCanvas(){
+    public DessinCanvas(int nv){
         super();
+        this.niveau = nv;
         this.addEventHandler(MouseEvent.MOUSE_PRESSED, eventClick);
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, eventGlissed);
         this.addEventHandler(MouseEvent.MOUSE_RELEASED, eventUnclicked);
@@ -49,19 +51,11 @@ public class DessinCanvas extends Pane{
         
         origine = new Point2D(0,0);
         
-        DessinPoint(0,0);
+        DessinPoint(0,0, Color.BLACK);
         
         setStyle("-fx-background-color: #fff9ea");
     }
     
-    public void DessinerCoinsPiece(Piece p)
-    {
-        for(Coin c : p.getCoins())
-        {
-            Point2D coo = realToScreenPos(c.getX(), c.getY());
-            DessinPoint(coo.getX(), coo.getY());
-        }
-    }
     public void UpdatePoly(Piece ancienne, Piece nouvelle)
     {
         double[] coos = new double[nouvelle.nbrMurs()*2];
@@ -85,13 +79,14 @@ public class DessinCanvas extends Pane{
         }
     }
     
-    public void DessinPoint(double x, double y)
+    public Circle DessinPoint(double x, double y, Color color)
     {
         Circle c = new Circle(realToScreenPos(x,y).getX(),realToScreenPos(x,y).getY(),rayonPoint);
         c.setFill(Color.TRANSPARENT);
-        c.setStroke(Color.BLACK);
+        c.setStroke(color);
         c.setStrokeWidth(epaisseurTrait);
         children.add(c);
+        return c;
     }
     
     public Polygon PolygonParametre(double[] coos)
@@ -150,13 +145,14 @@ public class DessinCanvas extends Pane{
                             if(n.isPressed())
                             {
                                 ((Polygon)n).setStroke(Color.BLUE);
-                                MainProg.layout.setRight(new ScrollPane(new Inspecteur(pieces.get(n))));
+                                MainProg.layout.setRight(new ScrollPane(new Inspecteur(pieces.get(n), thisDC, true)));
                                 return;
                             }else{
                                 ((Polygon)n).setStroke(Color.BLACK);
                             }
                         }
                     }
+                    MainProg.layout.setRight(null);
                     break;
                 case 's':
                     for(Node n : children)
@@ -231,7 +227,9 @@ public class DessinCanvas extends Pane{
                         Point2D pt = screenToRealPos(coos[i*2], coos[i*2+1]);
                         coins[i] = new Coin(pt.getX(), pt.getY());
                     }
-                    pieces.put(children.get(children.size() - 1), new Piece(coins));
+                    Piece p = new Piece(coins);
+                    pieces.put(children.get(children.size() - 1), p);
+                    MainProg.Batimentfinal.getNiveau(niveau).addPiece(p);
                     break;
                 default:
                     break;

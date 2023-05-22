@@ -18,6 +18,12 @@ public class Batiment {
     
     private int id;
     private ArrayList<Niveau> niveaux;
+    private boolean immeuble = false;
+    
+    public boolean isImmeuble()
+    {
+        return immeuble;
+    }
     
     public double devisBatiment()
     {
@@ -51,6 +57,11 @@ public class Batiment {
 
     public void setNiveaux(Niveau[] niveaux) {
         this.niveaux = new ArrayList<Niveau>(Arrays.asList(niveaux));
+    }
+    
+    public void addNiveau(Niveau niveau)
+    {
+        niveaux.add(niveau);
     }
     
     public Niveau getNiveau(int numero) {

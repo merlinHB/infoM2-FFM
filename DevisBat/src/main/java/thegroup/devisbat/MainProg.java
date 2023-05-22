@@ -39,6 +39,7 @@ public class MainProg extends Application {
         
         MagasinDeRevetements.LireRevetements();
         
+        Batimentfinal = new Batiment();
         
         layout = new BorderPane();
         
@@ -50,8 +51,6 @@ public class MainProg extends Application {
         
         
         btnsNv.addNv(1);
-        
-        Batimentfinal = new Batiment();
         
         Labelrevetement Labelle = new Labelrevetement();
         layout.setBottom(Labelle);

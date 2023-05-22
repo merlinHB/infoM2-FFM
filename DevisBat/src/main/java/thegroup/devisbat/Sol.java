@@ -60,7 +60,17 @@ public class Sol{
         return piece.surfacePiece();
     }
     
-
+    
+    public PourSol[] getRevetements()
+    {
+        PourSol[] ms = new PourSol[revetements.size()];
+        for(int i =0; i<revetements.size(); i++)
+        {
+            ms[i] = revetements.get(i);
+        }
+        return ms;
+    }
+    
     @Override
     public String toString() {
         String s = "S" + id +">>Piece" + piece.getId() + ";";

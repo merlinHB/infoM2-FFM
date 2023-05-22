@@ -58,6 +58,17 @@ public class Plafond{
         return piece.surfacePiece();
     }
     
+    
+    public PourPlafond[] getRevetements()
+    {
+        PourPlafond[] ms = new PourPlafond[revetements.size()];
+        for(int i =0; i<revetements.size(); i++)
+        {
+            ms[i] = revetements.get(i);
+        }
+        return ms;
+    }
+    
     public int getId() {
         return id;
     }

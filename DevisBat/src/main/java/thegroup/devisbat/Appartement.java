@@ -11,13 +11,10 @@ public class Appartement {
         this.pieces = new ArrayList<Piece>(Arrays.asList(pieces));
         this.proprio = proprio;
     }
-    public Appartement(int id, Piece[] pieces, String proprio, boolean save) {
-        this.id = id;
+    public Appartement(String proprio, Piece... pieces) {
+        this.id = MainProg.GenererId();
         this.pieces = new ArrayList<Piece>(Arrays.asList(pieces));
         this.proprio = proprio;
-        if(save){
-            Sauveteur.add(this);
-        }
     }
     
     private int id;
@@ -66,6 +63,11 @@ public class Appartement {
 
     public Piece[] getPieces() {
         return (Piece[])pieces.toArray();
+    }
+    
+    public void addPiece(Piece piece)
+    {
+        pieces.add(piece);
     }
     
     public Piece getPiece(int numero)

@@ -25,14 +25,13 @@ public class Labelrevetement extends HBox{
     public Labelrevetement(){
         
         Button UpdateRevetement = new Button("Update Revetement");
-        UpdateRevetement.setPrefSize(150, 50);
+        UpdateRevetement.setPrefSize(150, 25);
         setSpacing(10);
         UpdateRevetement.setOnAction(update);
         super.getChildren().add(UpdateRevetement);
         super.getChildren().add(totalrevetement);
-        
-        
-}
+    }
+    
    EventHandler<ActionEvent> update = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {

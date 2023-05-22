@@ -123,6 +123,30 @@ public class MagasinDeRevetements {
         }
         return pms;
     }
+        
+    public static PourSol[] getPourSols()
+    {
+        PourSol[] pms = new PourSol[pourSols.size()];
+        int i = 0;
+        for(PourSol pm : pourSols.values())
+        {
+            pms[i] = pm;
+            i++;
+        }
+        return pms;
+    }
+    
+    public static PourPlafond[] getPourPlafonds()
+    {
+        PourPlafond[] pms = new PourPlafond[pourPlafonds.size()];
+        int i = 0;
+        for(PourPlafond pm : pourPlafonds.values())
+        {
+            pms[i] = pm;
+            i++;
+        }
+        return pms;
+    }
     
     public static PourPlafond getPourPlafond(String nom)
     {

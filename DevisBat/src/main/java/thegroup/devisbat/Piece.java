@@ -121,6 +121,16 @@ public class Piece {
         return murs.get(numero%murs.size());
     }
     
+    public Sol getSol()
+    {
+        return this.sol;
+    }
+    
+    public Plafond getPlafond()
+    {
+        return this.plafond;
+    }
+    
     public int getId() {
         return id;
     }

@@ -10,11 +10,17 @@ public class Niveau {
         this.appartements = new ArrayList<Appartement>(Arrays.asList(appartements));
     }
     
-    public Niveau(int id, Appartement[] appartements, boolean save) {
-        this.id = id;
-        this.appartements = new ArrayList<Appartement>(Arrays.asList(appartements));
-        if(save){
-            Sauveteur.add(this);
+    public Niveau(boolean immeuble, Object... objs) {
+        this.id = MainProg.GenererId();
+        if(immeuble)
+        {
+            this.appartements = new ArrayList<Appartement>(Arrays.asList((Appartement[])objs));
+        }else{
+            this.appartements = new ArrayList<Appartement>(Arrays.asList(new Appartement("Propriétaire")));
+            for(Object o : objs)
+            {
+                addPiece((Piece)o);
+            }
         }
     }
     
@@ -37,6 +43,16 @@ public class Niveau {
             surface += a.surface();
         }
         return surface;
+    }
+    
+    public void addAppartement(Appartement appart)
+    {
+        appartements.add(appart);
+    }
+    
+    public void addPiece(Piece piece)
+    {
+        appartements.get(0).addPiece(piece);
     }
     
     public int getId()
