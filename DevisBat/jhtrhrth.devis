@@ -1,0 +1,1 @@
+Piece8>>M9;M10;M11;M12;S13;P14/ C4>>3.52;-4.08/ C5>>3.52;-11.24/ A3>>Piece8;Proprio:Propriétaire/ C6>>9.28;-11.24/ C7>>9.28;-4.08/ N2>>A3;/ M9>>C4;C5;Defaut&/ M11>>C6;C7;Defaut&/ M10>>C5;C6;Defaut&/ M12>>C7;C4;Defaut&/ B1>>N2;/ 

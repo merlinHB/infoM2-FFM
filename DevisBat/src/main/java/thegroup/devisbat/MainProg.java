@@ -60,6 +60,31 @@ public class MainProg extends Application {
         primaryStage.show();
     }
     
+    public static void Sauvegarder()
+    {
+        Sauveteur.clear();
+        for(Niveau n : Batimentfinal.getNiveaux())
+        {
+            for(Appartement a : n.getAppartements())
+            {
+                for(Piece p : a.getPieces())
+                {
+                    for(Mur m : p.getMurs())
+                    {
+                        Sauveteur.add(m.getC1());
+                        Sauveteur.add(m.getC2());
+                        Sauveteur.add(m);
+                    }
+                    Sauveteur.add(p);
+                }
+                Sauveteur.add(a);
+            }
+            Sauveteur.add(n);
+        }
+        Sauveteur.add(Batimentfinal);
+        Sauveteur.Enregister(ModeSelector.fileName.getText() + ".devis");
+    }
+    
     public static int GenererId()
     {
         lastId += 1;
