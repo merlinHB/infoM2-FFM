@@ -142,11 +142,11 @@ public class Piece {
     @Override
     public String toString() {
         String s = "Piece" + id + ">>";
+        s += "S" + sol.getId() + ";P" + plafond.getId();
         for(Mur m : murs)
         {
             s += "M" + m.getId() + ";";
         }
-        s += "S" + sol.getId() + ";P" + plafond.getId();
         return s;
     }
 }

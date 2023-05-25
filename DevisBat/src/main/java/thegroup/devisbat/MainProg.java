@@ -75,13 +75,14 @@ public class MainProg extends Application {
                         Sauveteur.add(m.getC2());
                         Sauveteur.add(m);
                     }
+                    Sauveteur.add(p.getSol());
+                    Sauveteur.add(p.getPlafond());
                     Sauveteur.add(p);
                 }
                 Sauveteur.add(a);
             }
             Sauveteur.add(n);
         }
-        Sauveteur.add(Batimentfinal);
         Sauveteur.Enregister(ModeSelector.fileName.getText() + ".devis");
     }
     
