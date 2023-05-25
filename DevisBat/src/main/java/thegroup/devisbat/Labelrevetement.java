@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Line;
 import static thegroup.devisbat.MainProg.Batimentfinal;
 
 /**
@@ -24,12 +25,15 @@ public class Labelrevetement extends HBox{
   
     public Labelrevetement(){
         
-        Button UpdateRevetement = new Button("Update Revetement");
+        Button UpdateRevetement = new Button("Recalculer le devis");
         UpdateRevetement.setPrefSize(150, 25);
         setSpacing(10);
         UpdateRevetement.setOnAction(update);
-        super.getChildren().add(UpdateRevetement);
-        super.getChildren().add(totalrevetement);
+        
+        getChildren().add(UpdateRevetement);
+        getChildren().add(totalrevetement);
+        getChildren().add(new Line(0,0,DessinCanvas.getPxsParMetre(),0));
+        getChildren().add(new Label("1 m"));
     }
     
    EventHandler<ActionEvent> update = new EventHandler<ActionEvent>() {

@@ -60,7 +60,7 @@ public class MainProg extends Application {
         primaryStage.show();
     }
     
-    public static void Sauvegarder()
+    public static void Sauvegarder(String nomDuFichier)
     {
         Sauveteur.clear();
         for(Niveau n : Batimentfinal.getNiveaux())
@@ -83,7 +83,7 @@ public class MainProg extends Application {
             }
             Sauveteur.add(n);
         }
-        Sauveteur.Enregister(ModeSelector.fileName.getText() + ".devis");
+        Sauveteur.Enregister(nomDuFichier + ".devis");
     }
     
     public static int GenererId()

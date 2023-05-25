@@ -75,17 +75,15 @@ public class Sauveteur
     
     public static void Enregister(String nomDuFichier)
     {
+        if(nomDuFichier.isEmpty()){
+            return;
+        }
         try
         {
             BufferedWriter bw = new BufferedWriter(new FileWriter(nomDuFichier, false));         
             bw.write("");
             bw.flush();
-//            for(Object obj : objets.values())
-//            {
-//                bw.write(obj.toString() + "/ ");
-//                System.out.println(obj.toString() +" Enregistré !");
-//            }
-            bw.write(MainProg.Batimentfinal.toString());
+            bw.write(MainProg.Batimentfinal.toString()+ "\n");
             for(Niveau n : niveauxObjs.values())
             {
                 bw.write(n.toString() + "/ ");
@@ -130,6 +128,9 @@ public class Sauveteur
     
     public static void Ouvrir(String nomDuFichier)
     {
+        if(nomDuFichier.isEmpty()){
+            return;
+        }
         try
         {
             BufferedReader br = new BufferedReader(new FileReader(nomDuFichier));

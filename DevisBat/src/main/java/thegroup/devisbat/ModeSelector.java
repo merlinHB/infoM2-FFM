@@ -38,13 +38,21 @@ public class ModeSelector extends HBox{
         sauv.setPrefSize(120, 20);
         sauv.setOnAction(eventSauv);
         
-        super.getChildren().add(creerPiece);
-        super.getChildren().add(ajustCoin);
-        super.getChildren().add(appRevs);
+//        openFileName = new TextField();
+//        openFileName.setPrefSize(120, 20);
+//        
+//        Button ouvr = new Button("Sauvegarder");
+//        ouvr.setPrefSize(120, 20);
+//        ouvr.setOnAction(eventOuvrir);
+        
+        getChildren().add(creerPiece);
+        getChildren().add(ajustCoin);
+        getChildren().add(appRevs);
         getChildren().add(new VBox(fileName, sauv));
     }
     
-    public static TextField fileName;
+    private TextField fileName;
+    private TextField openFileName;
     
     EventHandler<ActionEvent> eventRevPiece = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
@@ -62,7 +70,7 @@ public class ModeSelector extends HBox{
     EventHandler<ActionEvent> eventSauv = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
-            MainProg.Sauvegarder();
+            MainProg.Sauvegarder(fileName.getText());
         }
     };
     
@@ -70,6 +78,13 @@ public class ModeSelector extends HBox{
         public void handle(ActionEvent e)
         {
             MainProg.mode = 's';
+        }
+    };
+    
+    EventHandler<ActionEvent> eventOuvrir = new EventHandler<ActionEvent>() {
+        public void handle(ActionEvent e)
+        {
+            Sauveteur.Ouvrir(openFileName.getText()+".devis");
         }
     };
 }

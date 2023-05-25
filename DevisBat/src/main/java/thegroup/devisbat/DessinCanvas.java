@@ -56,6 +56,11 @@ public class DessinCanvas extends Pane{
         setStyle("-fx-background-color: #fff9ea");
     }
     
+    public static double getPxsParMetre()
+    {
+        return pixelsParMetre;
+    }
+    
     public void UpdatePoly(Piece ancienne, Piece nouvelle)
     {
         double[] coos = new double[nouvelle.nbrMurs()*2];
