@@ -44,7 +44,7 @@ public class NvSelector extends VBox{
         nvnv.setOnAction(eventNvClicked);
         getChildren().add(0, nvnv);
         
-        DessinCanvas niveau = new DessinCanvas(listeCanvas.size()-1);
+        DessinCanvas niveau = new DessinCanvas(listeCanvas.size());
         listeCanvas.add(0, niveau);
         MainProg.Batimentfinal.addNiveau(new Niveau(MainProg.Batimentfinal.isImmeuble()));
         

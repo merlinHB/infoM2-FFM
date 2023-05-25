@@ -70,7 +70,7 @@ public class Batiment {
     }
     
     public Niveau getNiveau(int numero) {
-        return niveaux.get(numero%niveaux.size());
+        return niveaux.get(numero);
     }
 
     public void setNiveaux(int numero, Niveau niveau) {

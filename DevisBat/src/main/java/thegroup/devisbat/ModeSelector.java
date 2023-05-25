@@ -38,17 +38,18 @@ public class ModeSelector extends HBox{
         sauv.setPrefSize(120, 20);
         sauv.setOnAction(eventSauv);
         
-//        openFileName = new TextField();
-//        openFileName.setPrefSize(120, 20);
-//        
-//        Button ouvr = new Button("Sauvegarder");
-//        ouvr.setPrefSize(120, 20);
-//        ouvr.setOnAction(eventOuvrir);
+        openFileName = new TextField();
+        openFileName.setPrefSize(120, 20);
+        
+        Button ouvr = new Button("Ouvrir");
+        ouvr.setPrefSize(120, 20);
+        ouvr.setOnAction(eventOuvrir);
         
         getChildren().add(creerPiece);
         getChildren().add(ajustCoin);
         getChildren().add(appRevs);
         getChildren().add(new VBox(fileName, sauv));
+        getChildren().add(new VBox(openFileName, ouvr));
     }
     
     private TextField fileName;
