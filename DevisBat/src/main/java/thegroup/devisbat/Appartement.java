@@ -62,7 +62,12 @@ public class Appartement {
     }
 
     public Piece[] getPieces() {
-        return (Piece[])pieces.toArray();
+        Piece[] p = new Piece[pieces.size()];
+        for(int i =0; i<pieces.size(); i++)
+        {
+            p[i] = pieces.get(i);
+        }
+        return p;
     }
     
     public void addPiece(Piece piece)

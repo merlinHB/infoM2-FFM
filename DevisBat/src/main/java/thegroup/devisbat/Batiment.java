@@ -52,7 +52,12 @@ public class Batiment {
     }
 
     public Niveau[] getNiveaux() {
-        return (Niveau[])niveaux.toArray();
+        Niveau[] nvs = new Niveau[niveaux.size()];
+        for(int i =0; i<niveaux.size(); i++)
+        {
+            nvs[i] = niveaux.get(i);
+        }
+        return nvs;
     }
 
     public void setNiveaux(Niveau[] niveaux) {

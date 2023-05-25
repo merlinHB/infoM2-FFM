@@ -29,6 +29,11 @@ public class Sauveteur
         
     }
     
+    public static void clear()
+    {
+        objets.clear();
+    }
+    
     public static void Enregister(String nomDuFichier)
     {
         try

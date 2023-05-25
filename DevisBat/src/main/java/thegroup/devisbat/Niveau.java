@@ -50,6 +50,16 @@ public class Niveau {
         appartements.add(appart);
     }
     
+    public Appartement[] getAppartements()
+    {
+        Appartement[] apparts = new Appartement[appartements.size()];
+        for(int i =0; i<appartements.size(); i++)
+        {
+            apparts[i] = appartements.get(i);
+        }
+        return apparts;
+    }
+    
     public void addPiece(Piece piece)
     {
         appartements.get(0).addPiece(piece);
